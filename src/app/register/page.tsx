@@ -52,7 +52,7 @@ export default function RegisterPage() {
             <KeyIcon size={72} />
           </div>
           <h1 className="text-2xl font-bold text-white">Регистрация</h1>
-          <p className="text-[#6b7a99] text-sm mt-1">Создайте аккаунт VPN</p>
+          <p className="text-[#6b7a99] text-sm mt-1">Создайте аккаунт KeyPay</p>
         </div>
 
         <div className="glass rounded-2xl p-8 animate-fade-up-delay-1">

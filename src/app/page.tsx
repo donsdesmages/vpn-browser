@@ -19,14 +19,14 @@ export default async function HomePage() {
         </div>
 
         <h1 className="text-5xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight">
-          <span className="gradient-text">VPN</span>
-          <span className="text-white"> Кабинет</span>
+          <span className="gradient-text">Key</span>
+          <span className="text-white">Pay</span>
         </h1>
 
         <p className="text-lg text-[#6b7a99] mb-10 animate-fade-up-delay-2 leading-relaxed">
-          Доступ без Telegram. Просто зарегистрируйся,
+          Покупай ключи доступа без Telegram.
           <br />
-          оплати и получи ключ прямо здесь.
+          Регистрируйся, оплачивай и подключайся.
         </p>
 
         <div className="flex gap-4 animate-fade-up-delay-3">
@@ -48,9 +48,9 @@ export default async function HomePage() {
       {/* Features */}
       <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl w-full animate-fade-up-delay-3">
         {[
-          { icon: "⚡", title: "Быстро", desc: "VLESS протокол, минимальные задержки" },
-          { icon: "🔒", title: "Безопасно", desc: "Шифрование и анонимность" },
-          { icon: "🌍", title: "Без ограничений", desc: "Все сайты, без блокировок" },
+          { icon: "⚡", title: "Быстро", desc: "Высокая скорость, минимальные задержки" },
+          { icon: "🔑", title: "Просто", desc: "Купи ключ и сразу подключайся" },
+          { icon: "🌍", title: "Везде", desc: "Работает на всех устройствах" },
         ].map((f) => (
           <div key={f.title} className="glass rounded-2xl p-6 text-center">
             <div className="text-3xl mb-3">{f.icon}</div>

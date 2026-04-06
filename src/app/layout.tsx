@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "VPN — Личный кабинет",
-  description: "Быстрый и надёжный VPN. Подключайтесь без Telegram.",
+  title: "KeyPay — Личный кабинет",
+  description: "Покупайте и управляйте ключами доступа без Telegram.",
 };
 
 export default function RootLayout({

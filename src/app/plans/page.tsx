@@ -49,7 +49,7 @@ export default function PlansPage() {
         <div className="flex items-center justify-between mb-10 animate-fade-up">
           <Link href="/dashboard" className="flex items-center gap-3">
             <KeyIcon size={36} />
-            <span className="font-bold text-lg gradient-text">VPN Кабинет</span>
+            <span className="font-bold text-lg gradient-text">KeyPay</span>
           </Link>
           <Link
             href="/dashboard"

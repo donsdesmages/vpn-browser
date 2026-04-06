@@ -40,8 +40,8 @@ export default function LoginPage() {
           <div className="animate-float animate-glow-pulse mb-4">
             <KeyIcon size={72} />
           </div>
-          <h1 className="text-2xl font-bold text-white">Вход в кабинет</h1>
-          <p className="text-[#6b7a99] text-sm mt-1">VPN без Telegram</p>
+          <h1 className="text-2xl font-bold text-white">Вход в <span className="gradient-text">KeyPay</span></h1>
+          <p className="text-[#6b7a99] text-sm mt-1">Ключи доступа без Telegram</p>
         </div>
 
         {/* Card */}

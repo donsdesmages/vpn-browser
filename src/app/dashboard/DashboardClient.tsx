@@ -59,7 +59,7 @@ export default function DashboardClient({ email }: { email: string }) {
       <div className="w-full max-w-lg flex items-center justify-between mb-10 animate-fade-up">
         <div className="flex items-center gap-3">
           <KeyIcon size={36} />
-          <span className="font-bold text-lg gradient-text">VPN Кабинет</span>
+          <span className="font-bold text-lg gradient-text">KeyPay</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[#6b7a99] text-sm hidden sm:block">{email}</span>
@@ -115,7 +115,7 @@ export default function DashboardClient({ email }: { email: string }) {
         {info?.accessKey && (
           <div className="glass rounded-2xl p-6 animate-fade-up-delay-1">
             <div className="text-[#6b7a99] text-sm font-medium uppercase tracking-wider mb-3">
-              Ваш VPN ключ
+              Ваш ключ доступа
             </div>
             <div className="bg-black/30 rounded-xl p-3 font-mono text-xs text-[#60a5fa] break-all mb-3">
               {showKey ? info.accessKey : "vless://••••••••••••••••••••••••"}
