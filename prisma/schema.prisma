@@ -7,10 +7,12 @@ datasource db {
 }
 
 model WebUser {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  passwordHash String   @map("password_hash")
-  createdAt    DateTime @default(now()) @map("created_at")
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  passwordHash     String   @map("password_hash")
+  phone            String?
+  telegramUsername String?  @map("telegram_username")
+  createdAt        DateTime @default(now()) @map("created_at")
 
   @@map("web_users")
 }

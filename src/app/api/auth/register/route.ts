@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
-  const { email, password } = await req.json();
+  const { email, password, phone, telegramUsername } = await req.json();
 
   if (!email || !password || password.length < 6) {
     return NextResponse.json(
@@ -21,7 +21,16 @@ export async function POST(req: NextRequest) {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  await prisma.webUser.create({ data: { email, passwordHash } });
+  await prisma.webUser.create({
+    data: {
+      email,
+      passwordHash,
+      phone: phone || null,
+      telegramUsername: telegramUsername
+        ? telegramUsername.replace(/^@/, "")
+        : null,
+    },
+  });
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

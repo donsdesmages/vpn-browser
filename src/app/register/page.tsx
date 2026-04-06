@@ -10,6 +10,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [phone, setPhone] = useState("");
+  const [telegramUsername, setTelegramUsername] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +32,7 @@ export default function RegisterPage() {
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, phone, telegramUsername }),
     });
 
     const data = await res.json();
@@ -45,7 +47,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="relative flex items-center justify-center min-h-screen px-4 z-10">
+    <main className="relative flex items-center justify-center min-h-screen px-4 py-8 z-10">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-8 animate-fade-up">
           <div className="animate-float animate-glow-pulse mb-4">
@@ -91,6 +93,47 @@ export default function RegisterPage() {
                 required
                 className="input-field w-full px-4 py-3 rounded-xl"
               />
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 my-1">
+              <div className="flex-1 h-px bg-white/10" />
+              <span className="text-[#6b7a99] text-xs">для уведомлений (необязательно)</span>
+              <div className="flex-1 h-px bg-white/10" />
+            </div>
+
+            <div>
+              <label className="text-sm text-[#6b7a99] mb-1.5 block">
+                Номер телефона
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+7 999 000 00 00"
+                className="input-field w-full px-4 py-3 rounded-xl"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-[#6b7a99] mb-1.5 block">
+                Telegram username
+              </label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6b7a99]">@</span>
+                <input
+                  type="text"
+                  value={telegramUsername}
+                  onChange={(e) =>
+                    setTelegramUsername(e.target.value.replace(/^@/, ""))
+                  }
+                  placeholder="username"
+                  className="input-field w-full pl-8 pr-4 py-3 rounded-xl"
+                />
+              </div>
+              <p className="text-[#6b7a99] text-xs mt-1.5">
+                Будем отправлять чеки об оплате в Telegram
+              </p>
             </div>
 
             {error && (
