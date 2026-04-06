@@ -48,11 +48,11 @@ jobs:
             docker run -d \
               --name vpn-browser \
               --network vpn-network \
-              -p 80:3000 \
+              -p 8081:3000 \
               --restart unless-stopped \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}" \
-              -e NEXTAUTH_URL="http://77.110.125.22" \
+              -e NEXTAUTH_URL="http://77.110.125.22:8081" \
               -e KEY_GENERATOR_URL="http://key-generator:8080" \
               -e YUKASSA_SHOP_ID="${{ secrets.YUKASSA_SHOP_ID }}" \
               -e YUKASSA_SECRET_KEY="${{ secrets.YUKASSA_SECRET_KEY }}" \
