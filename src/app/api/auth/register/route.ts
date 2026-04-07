@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
+import { hash } from "@node-rs/bcrypt";
 import { prisma } from "@/lib/prisma";
 import { detectContactType, normalizeContact } from "@/lib/contact";
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     telegramUsername = normalized;
   }
 
-  const passwordHash = await bcrypt.hash(password, 8);
+  const passwordHash = await hash(password, 6);
 
   await prisma.webUser.create({
     data: { email, passwordHash, phone, telegramUsername, contactType: type },

@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
+import { verify, hash } from "@node-rs/bcrypt";
 import { prisma } from "./prisma";
 import { detectContactType, normalizeContact } from "./contact";
 import { verifyOtp } from "./otp";
@@ -50,8 +50,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user) return null;
 
-        const isValid = await bcrypt.compare(credentials.password as string, user.passwordHash);
+        const isValid = await verify(credentials.password as string, user.passwordHash);
         if (!isValid) return null;
+
+        // Если хеш с высокими раундами — перехешируем для ускорения следующего входа
+        if (user.passwordHash.startsWith("$2b$10$") || user.passwordHash.startsWith("$2a$10$")) {
+          const newHash = await hash(credentials.password as string, 6);
+          await prisma.webUser.update({ where: { id: user.id }, data: { passwordHash: newHash } });
+        }
 
         return { id: String(user.id), email: user.email };
       },
