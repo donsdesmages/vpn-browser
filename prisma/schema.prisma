@@ -7,12 +7,29 @@ datasource db {
 }
 
 model WebUser {
-  id               Int      @id @default(autoincrement())
-  email            String   @unique
-  passwordHash     String   @map("password_hash")
+  id               Int           @id @default(autoincrement())
+  email            String        @unique
+  passwordHash     String        @map("password_hash")
   phone            String?
-  telegramUsername String?  @map("telegram_username")
-  createdAt        DateTime @default(now()) @map("created_at")
+  telegramUsername String?       @map("telegram_username")
+  contactType      String?       @map("contact_type")
+  telegramChatId   BigInt?       @map("telegram_chat_id")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  otpTokens        WebOtpToken[]
 
   @@map("web_users")
+}
+
+model WebOtpToken {
+  id         Int      @id @default(autoincrement())
+  webUserId  Int      @map("web_user_id")
+  token      String   @unique
+  tokenType  String   @map("token_type")
+  code       String?
+  expiresAt  DateTime @map("expires_at")
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+  user       WebUser  @relation(fields: [webUserId], references: [id], onDelete: Cascade)
+
+  @@map("web_otp_tokens")
 }

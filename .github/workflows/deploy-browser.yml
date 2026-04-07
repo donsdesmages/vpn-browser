@@ -56,5 +56,8 @@ jobs:
               -e KEY_GENERATOR_URL="http://key-generator:8080" \
               -e YUKASSA_SHOP_ID="${{ secrets.YUKASSA_SHOP_ID }}" \
               -e YUKASSA_SECRET_KEY="${{ secrets.YUKASSA_SECRET_KEY }}" \
+              -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+              -e TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
+              -e TELEGRAM_BOT_USERNAME="KeyPayNowBot" \
               ghcr.io/${{ env.IMAGE_NAME }}:latest
             docker ps | grep vpn-browser

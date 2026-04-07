@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
+import { verifyOtp } from "./otp";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
@@ -15,8 +16,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        otpToken: { label: "OTP Token", type: "text" },
+        otpCode: { label: "OTP Code", type: "text" },
       },
       async authorize(credentials) {
+        // OTP flow
+        if (credentials?.otpToken && credentials?.otpCode) {
+          const userId = await verifyOtp(
+            credentials.otpToken as string,
+            credentials.otpCode as string
+          );
+          if (!userId) return null;
+          const user = await prisma.webUser.findUnique({ where: { id: userId } });
+          if (!user) return null;
+          return { id: String(user.id), email: user.email };
+        }
+
+        // Password flow
         if (!credentials?.email || !credentials?.password) return null;
 
         const user = await prisma.webUser.findUnique({
