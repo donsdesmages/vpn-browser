@@ -29,14 +29,20 @@ export async function POST(req: NextRequest) {
 
   if (type === "email") {
     const { token, code } = await createOtp(user.id, "otp");
-    await sendOtpEmail(normalized, code);
+    // Отправляем письмо асинхронно — ответ приходит сразу, не ждём SMTP
+    sendOtpEmail(normalized, code).catch((e) =>
+      console.error("Email send failed:", e)
+    );
     return NextResponse.json({ token, method: "email" });
   }
 
   // phone or telegram — need chat_id
   if (user.telegramChatId) {
     const { token, code } = await createOtp(user.id, "otp");
-    await sendOtpViaTelegram(user.telegramChatId, code);
+    // Telegram тоже асинхронно
+    sendOtpViaTelegram(user.telegramChatId, code).catch((e) =>
+      console.error("Telegram send failed:", e)
+    );
     return NextResponse.json({ token, method: "telegram" });
   }
 

@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     telegramUsername = normalized;
   }
 
-  const passwordHash = await bcrypt.hash(password, 10);
+  const passwordHash = await bcrypt.hash(password, 8);
 
   await prisma.webUser.create({
     data: { email, passwordHash, phone, telegramUsername, contactType: type },

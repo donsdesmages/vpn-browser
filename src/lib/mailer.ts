@@ -1,15 +1,25 @@
 import nodemailer from "nodemailer";
 
-export async function sendOtpEmail(email: string, code: string): Promise<void> {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
-    },
-  });
+// Переиспользуем транспортёр — не открываем новое TLS-соединение на каждый запрос
+let _transporter: nodemailer.Transporter | null = null;
 
-  await transporter.sendMail({
+function getTransporter() {
+  if (!_transporter) {
+    _transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+      pool: true,       // connection pool
+      maxConnections: 3,
+    });
+  }
+  return _transporter;
+}
+
+export async function sendOtpEmail(email: string, code: string): Promise<void> {
+  await getTransporter().sendMail({
     from: `"KeyPay" <${process.env.GMAIL_USER}>`,
     to: email,
     subject: `Ваш код входа: ${code}`,
