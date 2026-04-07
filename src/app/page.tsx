@@ -42,13 +42,14 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <p className="text-sm text-[#4a5568] mt-6 animate-fade-up-delay-3">
-          Регистрируйся, оплачивай и подключайся
-        </p>
       </div>
 
       {/* Features */}
-      <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl w-full animate-fade-up-delay-3">
+      <div className="mt-20 max-w-3xl w-full animate-fade-up-delay-3">
+        <p className="text-lg text-[#6b7a99] text-center mb-6">
+          Регистрируйся, оплачивай и подключайся
+        </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {[
           {
             icon: (
@@ -86,6 +87,7 @@ export default async function HomePage() {
             <div className="text-sm text-[#6b7a99]">{f.desc}</div>
           </div>
         ))}
+      </div>
       </div>
     </main>
   );
