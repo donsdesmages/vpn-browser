@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import KeyIcon from "@/components/KeyIcon";
@@ -13,8 +13,22 @@ export default function RegisterPage() {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [contactTaken, setContactTaken] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const contactType = contact.trim() ? detectContactType(contact) : null;
+
+  useEffect(() => {
+    setContactTaken(false);
+    if (!contact.trim()) return;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(async () => {
+      const res = await fetch(`/api/auth/check-contact?contact=${encodeURIComponent(contact)}`);
+      const data = await res.json();
+      setContactTaken(data.taken);
+    }, 500);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [contact]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -73,11 +87,19 @@ export default function RegisterPage() {
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="email, +79001234567 или @telegram"
                 required
-                className="input-field w-full px-4 py-3 rounded-xl"
+                className={`input-field w-full px-4 py-3 rounded-xl transition-all ${
+                  contactTaken ? "border border-red-500 bg-red-500/10" : ""
+                }`}
               />
-              <p className="text-[#6b7a99] text-xs mt-1.5">
-                Email, номер телефона или Telegram @username
-              </p>
+              {contactTaken ? (
+                <p className="text-red-400 text-xs mt-1.5">
+                  Пользователь с таким контактом уже зарегистрирован
+                </p>
+              ) : (
+                <p className="text-[#6b7a99] text-xs mt-1.5">
+                  Email, номер телефона или Telegram @username
+                </p>
+              )}
             </div>
 
             <div>
@@ -113,7 +135,7 @@ export default function RegisterPage() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || contactTaken}
               className="btn-primary w-full py-3 rounded-xl mt-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? "Создаём аккаунт..." : "Зарегистрироваться"}
