@@ -80,8 +80,8 @@ export default async function HomePage() {
             <div className="flex justify-center mb-2">
               {f.icon}
             </div>
-            <div className="font-medium text-white text-sm mb-0.5">{f.title}</div>
-            <div className="text-xs text-[#6b7a99]">{f.desc}</div>
+            <div className="font-semibold text-white mb-1">{f.title}</div>
+            <div className="text-sm text-[#6b7a99]">{f.desc}</div>
           </div>
         ))}
       </div>
