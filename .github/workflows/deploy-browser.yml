@@ -57,6 +57,8 @@ jobs:
               -e YUKASSA_SHOP_ID="${{ secrets.YUKASSA_SHOP_ID }}" \
               -e YUKASSA_SECRET_KEY="${{ secrets.YUKASSA_SECRET_KEY }}" \
               -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+              -e GMAIL_USER="${{ secrets.GMAIL_USER }}" \
+              -e GMAIL_APP_PASSWORD="${{ secrets.GMAIL_APP_PASSWORD }}" \
               -e TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
               -e TELEGRAM_BOT_USERNAME="KeyPayNowBot" \
               ghcr.io/${{ env.IMAGE_NAME }}:latest

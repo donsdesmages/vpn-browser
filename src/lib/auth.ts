@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import { detectContactType, normalizeContact } from "./contact";
+import { verifyOtp } from "./otp";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
@@ -16,14 +17,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       credentials: {
         contact: { label: "Contact", type: "text" },
         password: { label: "Password", type: "password" },
+        otpToken: { label: "OTP Token", type: "text" },
+        otpCode: { label: "OTP Code", type: "text" },
       },
       async authorize(credentials) {
+        // OTP flow
+        if (credentials?.otpToken && credentials?.otpCode) {
+          const userId = await verifyOtp(
+            credentials.otpToken as string,
+            credentials.otpCode as string
+          );
+          if (!userId) return null;
+          const user = await prisma.webUser.findUnique({ where: { id: userId } });
+          if (!user) return null;
+          return { id: String(user.id), email: user.email };
+        }
+
+        // Password flow
         if (!credentials?.contact || !credentials?.password) return null;
 
-        const contact = credentials.contact as string;
-        const password = credentials.password as string;
-        const type = detectContactType(contact);
-        const normalized = normalizeContact(contact, type);
+        const type = detectContactType(credentials.contact as string);
+        const normalized = normalizeContact(credentials.contact as string, type);
 
         let user;
         if (type === "email") {
@@ -36,7 +50,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user) return null;
 
-        const valid = await bcrypt.compare(password, user.passwordHash);
+        const valid = await bcrypt.compare(credentials.password as string, user.passwordHash);
         if (!valid) return null;
 
         return { id: String(user.id), email: user.email };

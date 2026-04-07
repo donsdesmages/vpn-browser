@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { detectContactType, normalizeContact } from "@/lib/contact";
 import { createOtp, createLinkToken } from "@/lib/otp";
-import { sendOtpEmail } from "@/lib/resend";
+import { sendOtpEmail } from "@/lib/mailer";
 import { sendOtpViaTelegram } from "@/lib/telegram-bot";
 
 export async function POST(req: NextRequest) {
