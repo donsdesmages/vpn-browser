@@ -18,7 +18,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <h1 className="text-5xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight">
+        <h1 className="text-6xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight">
           <span className="gradient-text">Key</span>
           <span className="text-white">Pay</span>
         </h1>
@@ -40,7 +40,7 @@ export default async function HomePage() {
             href="/register"
             className="glass px-8 py-3 rounded-xl text-base text-[#60a5fa] font-semibold hover:bg-white/10 transition-all duration-300 inline-block"
           >
-            Регистрация
+            Зарегистрироваться
           </Link>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default async function HomePage() {
         {[
           {
             icon: (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
               </svg>
             ),
@@ -58,7 +58,7 @@ export default async function HomePage() {
           },
           {
             icon: (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
@@ -67,7 +67,7 @@ export default async function HomePage() {
           },
           {
             icon: (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="2" y1="12" x2="22" y2="12"/>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
@@ -76,10 +76,12 @@ export default async function HomePage() {
             title: "Везде", desc: "Работает на всех устройствах",
           },
         ].map((f) => (
-          <div key={f.title} className="glass rounded-2xl p-6 text-center">
-            <div className="flex justify-center mb-3">{f.icon}</div>
-            <div className="font-semibold text-white mb-1">{f.title}</div>
-            <div className="text-sm text-[#6b7a99]">{f.desc}</div>
+          <div key={f.title} className="glass rounded-xl p-4 text-center">
+            <div className="flex justify-center mb-2">
+              {f.icon}
+            </div>
+            <div className="font-medium text-white text-sm mb-0.5">{f.title}</div>
+            <div className="text-xs text-[#6b7a99]">{f.desc}</div>
           </div>
         ))}
       </div>

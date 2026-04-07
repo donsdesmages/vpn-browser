@@ -50,7 +50,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Key ring (outer) */}
       <circle
-        cx="52"
+        cx="60"
         cy="42"
         r="26"
         stroke="url(#key-grad)"
@@ -60,7 +60,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Key ring inner shadow (for depth) */}
       <circle
-        cx="52"
+        cx="60"
         cy="42"
         r="16"
         fill="url(#ring-inner)"
@@ -68,7 +68,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Ring highlight */}
       <circle
-        cx="52"
+        cx="60"
         cy="42"
         r="26"
         stroke="url(#highlight)"
@@ -79,9 +79,9 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
         strokeLinecap="round"
       />
 
-      {/* Key shaft */}
+      {/* Key shaft — centered under ring */}
       <rect
-        x="52.5"
+        x="53.5"
         y="55"
         width="13"
         height="45"
@@ -91,7 +91,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Shaft highlight */}
       <rect
-        x="52.5"
+        x="53.5"
         y="55"
         width="7"
         height="45"
@@ -101,7 +101,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Key tooth 1 */}
       <rect
-        x="65.5"
+        x="66.5"
         y="70"
         width="11"
         height="9"
@@ -111,7 +111,7 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
 
       {/* Key tooth 2 */}
       <rect
-        x="65.5"
+        x="66.5"
         y="84"
         width="9"
         height="9"
@@ -120,8 +120,8 @@ export default function KeyIcon({ size = 120, className = "" }: KeyIconProps) {
       />
 
       {/* Tooth highlights */}
-      <rect x="65.5" y="70" width="6" height="9" rx="3" fill="url(#highlight)" />
-      <rect x="65.5" y="84" width="5" height="9" rx="3" fill="url(#highlight)" />
+      <rect x="66.5" y="70" width="6" height="9" rx="3" fill="url(#highlight)" />
+      <rect x="66.5" y="84" width="5" height="9" rx="3" fill="url(#highlight)" />
     </svg>
   );
 }
