@@ -27,28 +27,30 @@ export default async function HomePage() {
           Твой ключ к безграничному доступу в сети
         </p>
 
-        <div className="flex gap-4 animate-fade-up-delay-3">
-          <Link
-            href="/login"
-            className="btn-primary px-8 py-3 rounded-xl text-base inline-block"
-          >
-            Войти
-          </Link>
-          <Link
-            href="/register"
-            className="glass px-8 py-3 rounded-xl text-base text-[#60a5fa] font-semibold hover:bg-white/10 transition-all duration-300 inline-block"
-          >
-            Зарегистрироваться
-          </Link>
+        <div className="flex flex-col items-center gap-3 mt-14 animate-fade-up-delay-3">
+          <div className="flex gap-4">
+            <Link
+              href="/login"
+              className="btn-primary px-8 py-3 rounded-xl text-base inline-block"
+            >
+              Войти
+            </Link>
+            <Link
+              href="/register"
+              className="glass px-8 py-3 rounded-xl text-base text-[#60a5fa] font-semibold hover:bg-white/10 transition-all duration-300 inline-block"
+            >
+              Зарегистрироваться
+            </Link>
+          </div>
+          <p className="text-lg text-[#6b7a99]">
+            Регистрируйся, оплачивай и подключайся
+          </p>
         </div>
 
       </div>
 
       {/* Features */}
-      <div className="mt-20 max-w-3xl w-full animate-fade-up-delay-3">
-        <p className="text-lg text-[#6b7a99] text-center mb-6">
-          Регистрируйся, оплачивай и подключайся
-        </p>
+      <div className="mt-10 max-w-3xl w-full animate-fade-up-delay-3">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {[
           {
