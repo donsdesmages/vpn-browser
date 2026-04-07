@@ -109,7 +109,7 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold text-white">
             Вход в <span className="gradient-text">KeyPay</span>
           </h1>
-          <p className="text-[#6b7a99] text-sm mt-1">Ключи доступа без Telegram</p>
+          <p className="text-[#6b7a99] text-sm mt-1">Свобода в сети — без лишних шагов</p>
         </div>
 
         <div className="glass rounded-2xl p-8 animate-fade-up-delay-1">
