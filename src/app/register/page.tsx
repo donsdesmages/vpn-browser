@@ -92,8 +92,10 @@ export default function RegisterPage() {
                 }`}
               />
               {contactTaken ? (
-                <p className="text-red-400 text-xs mt-1.5">
-                  Пользователь с таким контактом уже зарегистрирован
+                <p className="text-red-400 text-xs mt-1.5 font-medium">
+                  {contactType === "phone" && "Этот номер уже занят"}
+                  {contactType === "email" && "Этот email уже занят"}
+                  {contactType === "telegram" && "Этот @username уже занят"}
                 </p>
               ) : (
                 <p className="text-[#6b7a99] text-xs mt-1.5">
