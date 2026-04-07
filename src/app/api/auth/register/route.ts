@@ -19,7 +19,9 @@ export async function POST(req: NextRequest) {
   // Проверяем уникальность
   let existing;
   if (type === "email") {
-    existing = await prisma.webUser.findFirst({ where: { email: normalized } });
+    existing = await prisma.webUser.findFirst({
+      where: { OR: [{ email: normalized }, { linkedEmail: normalized }] },
+    });
   } else if (type === "phone") {
     existing = await prisma.webUser.findFirst({ where: { phone: normalized } });
   } else {

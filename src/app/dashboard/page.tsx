@@ -9,13 +9,15 @@ export default async function DashboardPage() {
 
   const user = await prisma.webUser.findUnique({
     where: { id: Number(session.user?.id) },
-    select: { telegramChatId: true },
+    select: { telegramChatId: true, contactType: true, linkedEmail: true },
   });
 
   return (
     <DashboardClient
       email={session.user?.email ?? ""}
       telegramLinked={!!user?.telegramChatId}
+      contactType={user?.contactType ?? "email"}
+      linkedEmail={user?.linkedEmail ?? null}
     />
   );
 }

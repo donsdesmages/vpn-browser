@@ -23,9 +23,13 @@ function formatDate(iso: string | null): string {
 export default function DashboardClient({
   email,
   telegramLinked,
+  contactType,
+  linkedEmail,
 }: {
   email: string;
   telegramLinked: boolean;
+  contactType: string;
+  linkedEmail: string | null;
 }) {
   const [info, setInfo] = useState<SubscriptionInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,6 +41,11 @@ export default function DashboardClient({
     deepLink: string;
     botUsername: string;
   } | null>(null);
+  const [linkedEmailState, setLinkedEmailState] = useState<string | null>(linkedEmail);
+  const [emailInput, setEmailInput] = useState("");
+  const [emailLinking, setEmailLinking] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [showEmailForm, setShowEmailForm] = useState(false);
 
   const fetchSubscription = useCallback(async () => {
     setLoading(true);
@@ -62,6 +71,30 @@ export default function DashboardClient({
     await fetch("/api/subscription", { method: "DELETE" });
     await fetchSubscription();
     setCancelling(false);
+  }
+
+  async function handleLinkEmail() {
+    setEmailError("");
+    setEmailLinking(true);
+    try {
+      const res = await fetch("/api/profile/email", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailInput }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setEmailError(data.error || "Ошибка");
+      } else {
+        setLinkedEmailState(emailInput.trim().toLowerCase());
+        setShowEmailForm(false);
+        setEmailInput("");
+      }
+    } catch {
+      setEmailError("Ошибка соединения");
+    } finally {
+      setEmailLinking(false);
+    }
   }
 
   async function handleLinkTelegram() {
@@ -209,6 +242,54 @@ export default function DashboardClient({
         {linked && (
           <div className="text-center text-sm text-green-400/70 animate-fade-up-delay-2">
             ✅ Telegram привязан — чеки будут приходить в бот
+          </div>
+        )}
+
+        {/* Email link block — для телефонных и telegram аккаунтов */}
+        {contactType !== "email" && (
+          <div className="glass rounded-2xl p-4 animate-fade-up-delay-2">
+            {linkedEmailState ? (
+              <div className="text-center text-sm text-green-400/70">
+                ✅ Email привязан: <span className="text-white">{linkedEmailState}</span>
+              </div>
+            ) : showEmailForm ? (
+              <div className="flex flex-col gap-3">
+                <p className="text-sm text-[#93c5fd]">Введите email для входа по коду:</p>
+                <input
+                  type="email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder="you@example.com"
+                  className="input-field w-full px-4 py-2.5 rounded-xl text-sm"
+                />
+                {emailError && (
+                  <div className="text-red-400 text-xs text-center">{emailError}</div>
+                )}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => { setShowEmailForm(false); setEmailError(""); }}
+                    className="glass flex-1 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white transition-all"
+                  >
+                    Отмена
+                  </button>
+                  <button
+                    onClick={handleLinkEmail}
+                    disabled={emailLinking || !emailInput.trim()}
+                    className="btn-primary flex-1 py-2 rounded-xl text-sm disabled:opacity-50"
+                  >
+                    {emailLinking ? "Сохраняем..." : "Привязать"}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowEmailForm(true)}
+                className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
+              >
+                <span>📧</span>
+                Привязать email для входа по коду
+              </button>
+            )}
           </div>
         )}
 

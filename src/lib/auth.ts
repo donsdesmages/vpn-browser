@@ -41,7 +41,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         let user;
         if (type === "email") {
-          user = await prisma.webUser.findFirst({ where: { email: normalized } });
+          user = await prisma.webUser.findFirst({
+            where: { OR: [{ email: normalized }, { linkedEmail: normalized }] },
+          });
         } else if (type === "phone") {
           user = await prisma.webUser.findFirst({ where: { phone: normalized } });
         } else {
