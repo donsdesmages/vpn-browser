@@ -20,12 +20,23 @@ function formatDate(iso: string | null): string {
   });
 }
 
-export default function DashboardClient({ email }: { email: string }) {
+export default function DashboardClient({
+  email,
+  telegramLinked,
+}: {
+  email: string;
+  telegramLinked: boolean;
+}) {
   const [info, setInfo] = useState<SubscriptionInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
   const [cancelling, setCancelling] = useState(false);
+  const [linked, setLinked] = useState(telegramLinked);
+  const [linkData, setLinkData] = useState<{
+    deepLink: string;
+    botUsername: string;
+  } | null>(null);
 
   const fetchSubscription = useCallback(async () => {
     setLoading(true);
@@ -51,6 +62,16 @@ export default function DashboardClient({ email }: { email: string }) {
     await fetch("/api/subscription", { method: "DELETE" });
     await fetchSubscription();
     setCancelling(false);
+  }
+
+  async function handleLinkTelegram() {
+    const res = await fetch("/api/link-telegram");
+    const data = await res.json();
+    if (data.alreadyLinked) {
+      setLinked(true);
+      return;
+    }
+    setLinkData({ deepLink: data.deepLink, botUsername: data.botUsername });
   }
 
   return (
@@ -152,6 +173,44 @@ export default function DashboardClient({ email }: { email: string }) {
             Инструкция
           </Link>
         </div>
+
+        {/* Telegram Link */}
+        {!linked && (
+          <div className="glass rounded-2xl p-4 animate-fade-up-delay-2">
+            {linkData ? (
+              <div className="flex flex-col gap-3">
+                <p className="text-sm text-[#93c5fd]">
+                  Откройте бота и отправьте команду для привязки Telegram:
+                </p>
+                <a
+                  href={linkData.deepLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full py-2.5 rounded-xl text-center text-sm font-semibold"
+                >
+                  Открыть @{linkData.botUsername}
+                </a>
+                <p className="text-[#6b7a99] text-xs text-center">
+                  Telegram нужен для получения чеков об оплате
+                </p>
+              </div>
+            ) : (
+              <button
+                onClick={handleLinkTelegram}
+                className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
+              >
+                <span>✈️</span>
+                Привязать Telegram для чеков
+              </button>
+            )}
+          </div>
+        )}
+
+        {linked && (
+          <div className="text-center text-sm text-green-400/70 animate-fade-up-delay-2">
+            ✅ Telegram привязан — чеки будут приходить в бот
+          </div>
+        )}
 
         {info?.active && (
           <button

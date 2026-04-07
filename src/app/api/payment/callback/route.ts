@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PLANS, PlanId } from "@/lib/yukassa";
 import { generateKey, toSurrogateTelegramId } from "@/lib/key-generator";
 import { prisma } from "@/lib/prisma";
+import { sendTelegramMessage } from "@/lib/telegram-bot";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -26,6 +27,14 @@ export async function POST(req: NextRequest) {
   const plan = PLANS[planId as PlanId];
 
   await generateKey(telegramId, user.email, plan.seconds);
+
+  if (user.telegramChatId) {
+    const siteUrl = process.env.NEXTAUTH_URL ?? "http://77.110.125.22:8081";
+    await sendTelegramMessage(
+      user.telegramChatId,
+      `✅ Оплата ${plan.price} ₽ прошла успешно!\n\n🔑 Тариф «${plan.label}» активирован.\n\nЛичный кабинет: ${siteUrl}/dashboard`
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }
