@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { loginWithCredentials } from "@/app/actions";
 import Link from "next/link";
 import KeyIcon from "@/components/KeyIcon";
 import { detectContactType, CONTACT_LABELS } from "@/lib/contact";
@@ -35,20 +36,14 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await signIn("credentials", {
-        contact,
-        password,
-        redirect: false,
-      });
-
-      if (res?.ok) {
-        router.push("/dashboard");
-      } else {
+      await loginWithCredentials(contact, password);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "";
+      if (msg.includes("CredentialsSignin") || msg.includes("credentials")) {
         setError("Неверный контакт или пароль");
-        setLoading(false);
+      } else {
+        setError("Ошибка соединения. Попробуйте ещё раз.");
       }
-    } catch {
-      setError("Ошибка соединения. Попробуйте ещё раз.");
       setLoading(false);
     }
   }

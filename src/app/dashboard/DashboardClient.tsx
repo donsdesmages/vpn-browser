@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { signOut } from "next-auth/react";
+import { useState, useEffect, useCallback, useTransition } from "react";
+import { logout } from "@/app/actions";
 import Link from "next/link";
 import KeyIcon from "@/components/KeyIcon";
 
@@ -36,6 +36,7 @@ export default function DashboardClient({
   const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
   const [cancelling, setCancelling] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [linked, setLinked] = useState(telegramLinked);
   const [linkData, setLinkData] = useState<{
     deepLink: string;
@@ -118,10 +119,11 @@ export default function DashboardClient({
         <div className="flex items-center gap-3">
           <span className="text-[#6b7a99] text-sm hidden sm:block">{email}</span>
           <button
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="glass px-4 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all"
+            onClick={() => startTransition(() => logout())}
+            disabled={isPending}
+            className="glass px-4 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all disabled:opacity-50"
           >
-            Выйти
+            {isPending ? "Выходим..." : "Выйти"}
           </button>
         </div>
       </div>
