@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import KeyIcon from "@/components/KeyIcon";
@@ -42,18 +41,7 @@ export default function RegisterPage() {
         return;
       }
 
-      // Автоматически входим после регистрации
-      const result = await signIn("credentials", {
-        contact,
-        password,
-        redirect: false,
-      });
-
-      if (result?.ok) {
-        router.push("/dashboard");
-      } else {
-        router.push("/login");
-      }
+      router.push("/login?registered=1");
     } catch {
       setError("Ошибка соединения. Попробуйте ещё раз.");
       setLoading(false);

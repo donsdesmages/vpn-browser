@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -11,6 +11,11 @@ type Step = "form" | "otp";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [justRegistered, setJustRegistered] = useState(false);
+
+  useEffect(() => {
+    setJustRegistered(new URLSearchParams(window.location.search).get("registered") === "1");
+  }, []);
   const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
@@ -112,6 +117,12 @@ export default function LoginPage() {
         </div>
 
         <div className="glass rounded-2xl p-8 animate-fade-up-delay-1">
+
+          {justRegistered && (
+            <div className="text-green-400 text-sm text-center bg-green-500/10 border border-green-500/20 rounded-xl py-2 mb-4">
+              ✅ Аккаунт создан — войдите чтобы продолжить
+            </div>
+          )}
 
           {/* Шаг 1: форма */}
           {step === "form" && (
