@@ -232,7 +232,6 @@ export default function DashboardClient({
                 onClick={handleLinkTelegram}
                 className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
               >
-                <span>✈️</span>
                 Привязать Telegram для чеков
               </button>
             )}
@@ -286,7 +285,6 @@ export default function DashboardClient({
                 onClick={() => setShowEmailForm(true)}
                 className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
               >
-                <span>📧</span>
                 Привязать email для входа по коду
               </button>
             )}

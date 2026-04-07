@@ -19,8 +19,3 @@ export const CONTACT_LABELS: Record<ContactType, string> = {
   telegram: "Telegram",
 };
 
-export const CONTACT_ICONS: Record<ContactType, string> = {
-  email: "✉️",
-  phone: "📱",
-  telegram: "✈️",
-};

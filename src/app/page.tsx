@@ -24,7 +24,7 @@ export default async function HomePage() {
         </h1>
 
         <p className="text-lg text-[#6b7a99] mb-10 animate-fade-up-delay-2 leading-relaxed">
-          Покупай ключи доступа без Telegram.
+          Твой ключ к безграничному доступу в сети.
           <br />
           Регистрируйся, оплачивай и подключайся.
         </p>
@@ -48,12 +48,36 @@ export default async function HomePage() {
       {/* Features */}
       <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl w-full animate-fade-up-delay-3">
         {[
-          { icon: "⚡", title: "Быстро", desc: "Высокая скорость, минимальные задержки" },
-          { icon: "🔑", title: "Просто", desc: "Купи ключ и сразу подключайся" },
-          { icon: "🌍", title: "Везде", desc: "Работает на всех устройствах" },
+          {
+            icon: (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            ),
+            title: "Быстро", desc: "Высокая скорость, минимальные задержки",
+          },
+          {
+            icon: (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            ),
+            title: "Просто", desc: "Купи ключ и сразу подключайся",
+          },
+          {
+            icon: (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            ),
+            title: "Везде", desc: "Работает на всех устройствах",
+          },
         ].map((f) => (
           <div key={f.title} className="glass rounded-2xl p-6 text-center">
-            <div className="text-3xl mb-3">{f.icon}</div>
+            <div className="flex justify-center mb-3">{f.icon}</div>
             <div className="font-semibold text-white mb-1">{f.title}</div>
             <div className="text-sm text-[#6b7a99]">{f.desc}</div>
           </div>
