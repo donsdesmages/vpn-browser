@@ -24,9 +24,7 @@ export default async function HomePage() {
         </h1>
 
         <p className="text-lg text-[#6b7a99] mb-10 animate-fade-up-delay-2 leading-relaxed">
-          Твой ключ к безграничному доступу в сети.
-          <br />
-          Регистрируйся, оплачивай и подключайся.
+          Твой ключ к безграничному доступу в сети
         </p>
 
         <div className="flex gap-4 animate-fade-up-delay-3">
@@ -43,6 +41,10 @@ export default async function HomePage() {
             Зарегистрироваться
           </Link>
         </div>
+
+        <p className="text-sm text-[#4a5568] mt-6 animate-fade-up-delay-3">
+          Регистрируйся, оплачивай и подключайся
+        </p>
       </div>
 
       {/* Features */}
