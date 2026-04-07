@@ -51,7 +51,7 @@ export default async function HomePage() {
 
       {/* Features */}
       <div className="mt-10 max-w-3xl w-full animate-fade-up-delay-3">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-3">
         {[
           {
             icon: (
@@ -81,12 +81,10 @@ export default async function HomePage() {
             title: "Везде", desc: "Работает на всех устройствах",
           },
         ].map((f) => (
-          <div key={f.title} className="glass rounded-xl p-4 text-center">
-            <div className="flex justify-center mb-2">
-              {f.icon}
-            </div>
-            <div className="font-semibold text-white mb-1">{f.title}</div>
-            <div className="text-sm text-[#6b7a99]">{f.desc}</div>
+          <div key={f.title} className="glass rounded-xl p-3 text-center">
+            <div className="flex justify-center mb-1.5">{f.icon}</div>
+            <div className="font-semibold text-white text-sm mb-0.5">{f.title}</div>
+            <div className="text-xs text-[#6b7a99] leading-snug">{f.desc}</div>
           </div>
         ))}
       </div>

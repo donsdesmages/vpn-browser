@@ -13,11 +13,16 @@
   box-sizing: border-box;
 }
 
+html {
+  background: var(--bg-primary);
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
