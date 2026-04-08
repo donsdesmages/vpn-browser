@@ -23,12 +23,15 @@ export async function createPayment(
   const plan = PLANS[planId];
   const idempotenceKey = `${webUserId}-${planId}-${Date.now()}`;
 
+  const notificationUrl = `${process.env.NEXTAUTH_URL}/api/payment/callback`;
+
   const body = {
     amount: { value: String(plan.price) + ".00", currency: "RUB" },
     confirmation: { type: "redirect", return_url: returnUrl },
     capture: true,
     description: `VPN ${plan.label}`,
     metadata: { webUserId: String(webUserId), planId } satisfies PaymentMetadata,
+    notification_url: notificationUrl,
   };
 
   const res = await fetch(`${BASE_URL}/payments`, {
