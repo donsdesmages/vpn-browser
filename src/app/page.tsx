@@ -18,7 +18,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <h1 className="text-6xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight gradient-text">
+        <h1 className="text-6xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight gradient-text pb-2">
           KeyPay
         </h1>
 
