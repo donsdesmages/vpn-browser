@@ -13,11 +13,7 @@ export default async function HomePage() {
       <div className="flex flex-col items-center text-center max-w-xl">
         {/* Animated key */}
         <div className="mb-10 animate-fade-up">
-          <div className="relative flex items-center justify-center animate-float">
-            {/* Glow blob behind key — no filter, no compositing artifacts */}
-            <div className="absolute w-48 h-48 rounded-full animate-glow-pulse"
-              style={{ background: "radial-gradient(circle, rgba(59,130,246,0.35) 0%, rgba(37,99,235,0.15) 50%, transparent 75%)" }}
-            />
+          <div className="animate-float animate-glow-pulse">
             <KeyIcon size={160} />
           </div>
         </div>
