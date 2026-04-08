@@ -26,15 +26,12 @@ export default async function HomePage() {
           Твой ключ к безграничному доступу в сети
         </p>
 
-        <div className="mt-14 animate-fade-up-delay-3 flex flex-col items-center gap-3">
+        <div className="mt-14 animate-fade-up-delay-3">
           <Link
-            href="/register"
+            href="/login"
             className="btn-primary px-10 py-4 rounded-xl text-lg font-bold inline-block"
           >
             Получить ключ
-          </Link>
-          <Link href="/login" className="text-[#6b7a99] text-sm hover:text-[#60a5fa] transition-colors">
-            Уже есть аккаунт? Войти
           </Link>
         </div>
 
