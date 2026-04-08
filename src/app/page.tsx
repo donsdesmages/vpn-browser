@@ -18,9 +18,8 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <h1 className="text-6xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight">
-          <span className="gradient-text">Key</span>
-          <span className="text-white">Pay</span>
+        <h1 className="text-6xl font-bold mb-4 animate-fade-up-delay-1 tracking-tight gradient-text">
+          KeyPay
         </h1>
 
         <p className="text-lg text-[#6b7a99] mb-10 animate-fade-up-delay-2 leading-relaxed">
