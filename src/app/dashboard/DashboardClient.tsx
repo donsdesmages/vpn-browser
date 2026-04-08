@@ -237,10 +237,9 @@ export default function DashboardClient({
               <div className={`font-mono text-xs text-[#60a5fa] ${keyExpanded ? "break-all" : "truncate"}`}>
                 {info.accessKey}
               </div>
-              {/* Copy icon */}
               <button
                 onClick={copyKey}
-                className="absolute right-2 top-2 w-7 h-7 flex items-center justify-center rounded-lg text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-lg text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all"
                 title="Скопировать ключ"
               >
                 {copied ? (
@@ -254,20 +253,18 @@ export default function DashboardClient({
                   </svg>
                 )}
               </button>
-              {/* Expand toggle */}
-              <button
-                onClick={() => setKeyExpanded((v) => !v)}
-                className="absolute right-2 bottom-2 w-7 h-7 flex items-center justify-center rounded-lg text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all"
-                title={keyExpanded ? "Свернуть" : "Развернуть"}
-              >
-                <svg
-                  width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                  className={`transition-transform duration-200 ${keyExpanded ? "rotate-180" : ""}`}
-                >
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </button>
             </div>
+            <button
+              onClick={() => setKeyExpanded((v) => !v)}
+              className="flex items-center justify-center gap-1 w-full py-1 text-[#6b7a99] hover:text-white transition-colors"
+            >
+              <svg
+                width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                className={`transition-transform duration-200 ${keyExpanded ? "rotate-180" : ""}`}
+              >
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
           </div>
         )}
 
