@@ -196,8 +196,8 @@ export default function DashboardClient({
           ) : (
             <>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[#6b7a99] text-sm font-medium uppercase tracking-wider">
-                  Статус подписки
+                <span className="text-white font-semibold">
+                  Подписка
                 </span>
                 {info?.active ? (
                   <span className="flex items-center gap-1.5 text-green-400 font-semibold text-sm">
@@ -269,53 +269,96 @@ export default function DashboardClient({
           </Link>
         </div>
 
-        {/* Telegram Link */}
-        {!linked && (
-          <div className="glass rounded-2xl p-4 animate-fade-up-delay-2">
-            {linkData ? (
-              <div className="flex flex-col gap-3">
-                <p className="text-sm text-[#93c5fd]">
-                  Откройте бота и отправьте команду для привязки Telegram:
-                </p>
-                <a
-                  href={linkData.deepLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary w-full py-2.5 rounded-xl text-center text-sm font-semibold"
-                >
-                  Открыть @{linkData.botUsername}
-                </a>
-                <p className="text-[#6b7a99] text-xs text-center">
-                  Telegram нужен для получения чеков об оплате
-                </p>
+        {/* Telegram + Email link blocks */}
+        <div className="flex flex-col gap-3 animate-fade-up-delay-2">
+
+          {/* Telegram */}
+          {linked ? (
+            <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#229ed9]/15 flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
+                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+                </svg>
               </div>
-            ) : (
-              <button
-                onClick={handleLinkTelegram}
-                className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
+              <div className="flex-1 min-w-0">
+                <div className="text-white font-medium text-sm">Telegram привязан</div>
+                <div className="text-[#6b7a99] text-xs mt-0.5">Чеки об оплате приходят в бот</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          ) : linkData ? (
+            <div className="glass rounded-2xl px-5 py-4 flex flex-col gap-3">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-[#229ed9]/15 flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-white font-medium text-sm">Привязать Telegram</div>
+                  <div className="text-[#6b7a99] text-xs mt-0.5">Откройте бота и отправьте команду</div>
+                </div>
+              </div>
+              <a
+                href={linkData.deepLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary w-full py-2.5 rounded-xl text-center text-sm font-semibold"
               >
-                Привязать Telegram для чеков
-              </button>
-            )}
-          </div>
-        )}
+                Открыть @{linkData.botUsername}
+              </a>
+            </div>
+          ) : (
+            <button
+              onClick={handleLinkTelegram}
+              className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#229ed9]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#229ed9]/20 transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
+                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+                </svg>
+              </div>
+              <div className="flex-1 text-left">
+                <div className="text-white font-medium text-sm">Привязать Telegram</div>
+                <div className="text-[#6b7a99] text-xs mt-0.5">Получайте чеки об оплате в бот</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          )}
 
-        {linked && (
-          <div className="text-center text-sm text-green-400/70 animate-fade-up-delay-2">
-            ✅ Telegram привязан — чеки будут приходить в бот
-          </div>
-        )}
-
-        {/* Email link block — для телефонных и telegram аккаунтов */}
-        {contactType !== "email" && (
-          <div className="glass rounded-2xl p-4 animate-fade-up-delay-2">
-            {linkedEmailState ? (
-              <div className="text-center text-sm text-green-400/70">
-                ✅ Email привязан: <span className="text-white">{linkedEmailState}</span>
+          {/* Email */}
+          {contactType !== "email" && (
+            linkedEmailState ? (
+              <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <polyline points="2,4 12,13 22,4"/>
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-white font-medium text-sm">Email привязан</div>
+                  <div className="text-[#6b7a99] text-xs mt-0.5 truncate">{linkedEmailState}</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
               </div>
             ) : showEmailForm ? (
-              <div className="flex flex-col gap-3">
-                <p className="text-sm text-[#93c5fd]">Введите email для входа по коду:</p>
+              <div className="glass rounded-2xl px-5 py-4 flex flex-col gap-3">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <polyline points="2,4 12,13 22,4"/>
+                    </svg>
+                  </div>
+                  <div className="text-white font-medium text-sm">Введите email</div>
+                </div>
                 <input
                   type="email"
                   value={emailInput}
@@ -324,19 +367,19 @@ export default function DashboardClient({
                   className="input-field w-full px-4 py-2.5 rounded-xl text-sm"
                 />
                 {emailError && (
-                  <div className="text-red-400 text-xs text-center">{emailError}</div>
+                  <div className="text-red-400 text-xs">{emailError}</div>
                 )}
                 <div className="flex gap-2">
                   <button
                     onClick={() => { setShowEmailForm(false); setEmailError(""); }}
-                    className="glass flex-1 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white transition-all"
+                    className="glass flex-1 py-2.5 rounded-xl text-sm text-[#6b7a99] hover:text-white transition-all"
                   >
                     Отмена
                   </button>
                   <button
                     onClick={handleLinkEmail}
                     disabled={emailLinking || !emailInput.trim()}
-                    className="btn-primary flex-1 py-2 rounded-xl text-sm disabled:opacity-50"
+                    className="btn-primary flex-1 py-2.5 rounded-xl text-sm disabled:opacity-50"
                   >
                     {emailLinking ? "Сохраняем..." : "Привязать"}
                   </button>
@@ -345,13 +388,26 @@ export default function DashboardClient({
             ) : (
               <button
                 onClick={() => setShowEmailForm(true)}
-                className="w-full flex items-center justify-center gap-2 text-sm text-[#6b7a99] hover:text-[#93c5fd] transition-colors py-1"
+                className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group"
               >
-                Привязать email для входа по коду
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <polyline points="2,4 12,13 22,4"/>
+                  </svg>
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="text-white font-medium text-sm">Привязать Email</div>
+                  <div className="text-[#6b7a99] text-xs mt-0.5">Для входа по коду подтверждения</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
               </button>
-            )}
-          </div>
-        )}
+            )
+          )}
+
+        </div>
 
         {info?.active && (
           <button
