@@ -90,7 +90,19 @@ export default function DashboardClient({
 
   async function copyKey() {
     if (!info?.accessKey) return;
-    await navigator.clipboard.writeText(info.accessKey);
+    try {
+      await navigator.clipboard.writeText(info.accessKey);
+    } catch {
+      // Fallback для Safari / HTTP
+      const el = document.createElement("textarea");
+      el.value = info.accessKey;
+      el.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+      document.body.appendChild(el);
+      el.focus();
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -139,6 +151,19 @@ export default function DashboardClient({
 
   return (
     <main className="relative flex flex-col items-center min-h-screen px-4 pt-12 pb-16 z-10">
+
+      {/* Toast */}
+      <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        copied ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}>
+        <div className="flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-medium text-white"
+          style={{ background: "rgba(34,197,94,0.2)", border: "1px solid rgba(34,197,94,0.4)", backdropFilter: "blur(12px)" }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Ключ скопирован
+        </div>
+      </div>
       {/* Header */}
       <div className="w-full max-w-lg flex items-center justify-between mb-10 animate-fade-up">
         <div className="flex items-center gap-3">
