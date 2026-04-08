@@ -101,6 +101,11 @@ export default function LoginPage() {
 
   return (
     <main className="relative flex items-center justify-center min-h-screen px-4 z-10">
+      <Link href="/" className="absolute top-5 left-5 flex items-center gap-1.5 text-[#6b7a99] hover:text-white transition-colors text-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </Link>
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-8 animate-fade-up">
           <div className="animate-float animate-glow-pulse mb-4">
