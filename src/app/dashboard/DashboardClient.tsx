@@ -259,7 +259,7 @@ export default function DashboardClient({
               {paymentSuccess ? "Ваш ключ готов" : "Ваш ключ доступа"}
             </div>
             <div className="relative bg-black/30 rounded-xl p-3 pr-10">
-              <div className={`font-mono text-xs text-[#60a5fa] ${keyExpanded ? "break-all" : "truncate"}`}>
+              <div className={`text-xs text-[#60a5fa] ${keyExpanded ? "break-all" : "truncate"}`}>
                 {info.accessKey}
               </div>
               <button
