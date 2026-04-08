@@ -15,6 +15,7 @@ model WebUser {
   contactType      String?       @map("contact_type")
   telegramChatId   BigInt?       @map("telegram_chat_id")
   linkedEmail      String?       @unique @map("linked_email")
+  accessKey        String?       @map("access_key")
   createdAt        DateTime      @default(now()) @map("created_at")
   otpTokens        WebOtpToken[]
 

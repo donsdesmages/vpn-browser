@@ -26,7 +26,12 @@ export async function POST(req: NextRequest) {
   const telegramId = toSurrogateTelegramId(user.id);
   const plan = PLANS[planId as PlanId];
 
-  await generateKey(telegramId, user.email, plan.seconds);
+  const accessKey = await generateKey(telegramId, user.email, plan.seconds);
+
+  await prisma.webUser.update({
+    where: { id: user.id },
+    data: { accessKey },
+  });
 
   if (user.telegramChatId) {
     const siteUrl = process.env.NEXTAUTH_URL ?? "http://77.110.125.22:8081";

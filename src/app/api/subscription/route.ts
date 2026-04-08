@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getUserInfo, toSurrogateTelegramId } from "@/lib/key-generator";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   const session = await auth();
@@ -8,10 +9,15 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const telegramId = toSurrogateTelegramId(Number(session.user.id));
-  const info = await getUserInfo(telegramId);
+  const userId = Number(session.user.id);
+  const telegramId = toSurrogateTelegramId(userId);
 
-  return NextResponse.json(info);
+  const [info, user] = await Promise.all([
+    getUserInfo(telegramId),
+    prisma.webUser.findUnique({ where: { id: userId }, select: { accessKey: true } }),
+  ]);
+
+  return NextResponse.json({ ...info, accessKey: user?.accessKey ?? null });
 }
 
 export async function DELETE() {

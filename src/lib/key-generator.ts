@@ -31,7 +31,7 @@ export async function generateKey(
   telegramId: number,
   email: string,
   durationSeconds: number
-): Promise<void> {
+): Promise<string> {
   const params = new URLSearchParams({
     telegramId: String(telegramId),
     email,
@@ -44,6 +44,8 @@ export async function generateKey(
   if (!res.ok) {
     throw new Error(`key-generator error: ${res.status}`);
   }
+  const data = await res.json();
+  return data.key as string;
 }
 
 export async function removeUser(telegramId: number): Promise<void> {
