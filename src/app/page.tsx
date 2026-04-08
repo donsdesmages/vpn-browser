@@ -27,24 +27,16 @@ export default async function HomePage() {
           Твой ключ к безграничному доступу в сети
         </p>
 
-        <div className="flex flex-col items-center gap-3 mt-14 animate-fade-up-delay-3">
-          <div className="flex gap-4">
-            <Link
-              href="/login"
-              className="btn-primary px-8 py-3 rounded-xl text-base inline-block"
-            >
-              Войти
-            </Link>
-            <Link
-              href="/register"
-              className="glass px-8 py-3 rounded-xl text-base text-[#60a5fa] font-semibold hover:bg-white/10 transition-all duration-300 inline-block"
-            >
-              Зарегистрироваться
-            </Link>
-          </div>
-          <p className="text-lg text-[#6b7a99]">
-            Регистрируйся, оплачивай и подключайся
-          </p>
+        <div className="mt-14 animate-fade-up-delay-3 flex flex-col items-center gap-3">
+          <Link
+            href="/register"
+            className="btn-primary px-10 py-4 rounded-xl text-lg font-bold inline-block"
+          >
+            Получить ключ
+          </Link>
+          <Link href="/login" className="text-[#6b7a99] text-sm hover:text-[#60a5fa] transition-colors">
+            Уже есть аккаунт? Войти
+          </Link>
         </div>
 
       </div>

@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Неверный тариф" }, { status: 400 });
   }
 
-  const returnUrl = `${process.env.NEXTAUTH_URL}/dashboard`;
+  const returnUrl = `${process.env.NEXTAUTH_URL}/dashboard?payment=success`;
   const payment = await createPayment(
     planId as PlanId,
     Number(session.user.id),

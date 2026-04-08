@@ -47,6 +47,8 @@ export default function DashboardClient({
   const [emailLinking, setEmailLinking] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [polling, setPolling] = useState(false);
 
   const fetchSubscription = useCallback(async () => {
     setLoading(true);
@@ -57,7 +59,34 @@ export default function DashboardClient({
 
   useEffect(() => {
     fetchSubscription();
+    if (new URLSearchParams(window.location.search).get("payment") === "success") {
+      setPaymentSuccess(true);
+      window.history.replaceState({}, "", "/dashboard");
+    }
   }, [fetchSubscription]);
+
+  // Полинг ключа после оплаты — webhook может прийти с задержкой
+  useEffect(() => {
+    if (!paymentSuccess || info?.accessKey) return;
+    setPolling(true);
+    let tries = 0;
+    const interval = setInterval(async () => {
+      tries++;
+      const res = await fetch("/api/subscription");
+      if (res.ok) {
+        const data = await res.json();
+        setInfo(data);
+        if (data.accessKey || tries >= 10) {
+          clearInterval(interval);
+          setPolling(false);
+        }
+      } else if (tries >= 10) {
+        clearInterval(interval);
+        setPolling(false);
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [paymentSuccess, info?.accessKey]);
 
   async function copyKey() {
     if (!info?.accessKey) return;
@@ -129,6 +158,34 @@ export default function DashboardClient({
       </div>
 
       <div className="w-full max-w-lg flex flex-col gap-4">
+
+        {/* Баннер успешной оплаты */}
+        {paymentSuccess && (
+          <div className="rounded-2xl p-5 animate-fade-up" style={{
+            background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(16,185,129,0.1) 100%)",
+            border: "1px solid rgba(34,197,94,0.4)",
+            boxShadow: "0 0 30px rgba(34,197,94,0.15)"
+          }}>
+            <div className="flex items-center gap-3 mb-1">
+              <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <span className="text-green-400 font-bold text-lg">Оплата прошла успешно!</span>
+            </div>
+            <p className="text-green-400/70 text-sm ml-11">
+              {info?.accessKey ? "Ваш ключ доступа активирован и готов к использованию" : polling ? "Активируем ключ доступа..." : "Ключ скоро появится в кабинете"}
+            </p>
+            {polling && !info?.accessKey && (
+              <div className="flex items-center gap-2 ml-11 mt-2">
+                <div className="w-4 h-4 border-2 border-green-400 border-t-transparent rounded-full animate-spin" />
+                <span className="text-green-400/60 text-xs">Обычно занимает несколько секунд</span>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Subscription status */}
         <div className="glass rounded-2xl p-6 animate-fade-up-delay-1">
           {loading ? (
@@ -169,9 +226,12 @@ export default function DashboardClient({
 
         {/* VPN Key */}
         {info?.accessKey && (
-          <div className="glass rounded-2xl p-6 animate-fade-up-delay-1">
+          <div className={`rounded-2xl p-6 animate-fade-up-delay-1 transition-all ${paymentSuccess
+            ? "border border-blue-500/40 bg-blue-500/5"
+            : "glass"}`}
+            style={paymentSuccess ? { boxShadow: "0 0 40px rgba(59,130,246,0.15)" } : {}}>
             <div className="text-[#6b7a99] text-sm font-medium uppercase tracking-wider mb-3">
-              Ваш ключ доступа
+              {paymentSuccess ? "Ваш ключ готов" : "Ваш ключ доступа"}
             </div>
             <div className="bg-black/30 rounded-xl p-3 font-mono text-xs text-[#60a5fa] break-all mb-3">
               {showKey ? info.accessKey : "vless://••••••••••••••••••••••••"}
