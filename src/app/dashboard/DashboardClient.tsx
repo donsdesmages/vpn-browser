@@ -33,7 +33,6 @@ export default function DashboardClient({
 }) {
   const [info, setInfo] = useState<SubscriptionInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
   const [cancelling, setCancelling] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -233,21 +232,25 @@ export default function DashboardClient({
             <div className="text-[#6b7a99] text-sm font-medium uppercase tracking-wider mb-3">
               {paymentSuccess ? "Ваш ключ готов" : "Ваш ключ доступа"}
             </div>
-            <div className="bg-black/30 rounded-xl p-3 font-mono text-xs text-[#60a5fa] break-all mb-3">
-              {showKey ? info.accessKey : "vless://••••••••••••••••••••••••"}
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setShowKey((v) => !v)}
-                className="glass px-4 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all flex-1"
-              >
-                {showKey ? "Скрыть" : "Показать"}
-              </button>
+            <div className="relative flex items-center bg-black/30 rounded-xl pr-12">
+              <div className="flex-1 p-3 font-mono text-xs text-[#60a5fa] break-all select-none">
+                vless://••••••••••••••••••••••••
+              </div>
               <button
                 onClick={copyKey}
-                className="btn-primary px-4 py-2 rounded-xl text-sm flex-1"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all flex-shrink-0"
+                title="Скопировать ключ"
               >
-                {copied ? "Скопировано ✓" : "Скопировать"}
+                {copied ? (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                ) : (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                )}
               </button>
             </div>
           </div>
