@@ -136,7 +136,7 @@ export default function LoginPage() {
                   type="text"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  placeholder="email, +79001234567 или @telegram"
+                  placeholder="email, телефон или @telegram"
                   required
                   className="input-field w-full px-4 py-3 rounded-xl"
                 />

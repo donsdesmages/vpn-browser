@@ -85,7 +85,7 @@ export default function RegisterPage() {
                 type="text"
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
-                placeholder="email, +79001234567 или @telegram"
+                placeholder="email, телефон или @telegram"
                 required
                 className={`input-field w-full px-4 py-3 rounded-xl transition-all ${
                   contactTaken ? "border border-red-500 bg-red-500/10" : ""
@@ -96,10 +96,6 @@ export default function RegisterPage() {
                   {contactType === "phone" && "Этот номер уже занят"}
                   {contactType === "email" && "Этот email уже занят"}
                   {contactType === "telegram" && "Этот @username уже занят"}
-                </p>
-              ) : (
-                <p className="text-[#6b7a99] text-xs mt-1.5">
-                  Email, номер телефона или Telegram @username
                 </p>
               )}
             </div>
