@@ -362,7 +362,7 @@ export default function DashboardClient({
             <div className="glass rounded-2xl overflow-hidden">
               <button
                 onClick={() => setLinkData(null)}
-                className="w-full px-5 py-4 flex items-center gap-4 hover:bg-white/5 transition-all"
+                className="w-full px-5 py-4 flex items-center gap-4 transition-all"
               >
                 <div className="w-10 h-10 rounded-xl bg-[#229ed9]/15 flex items-center justify-center flex-shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
