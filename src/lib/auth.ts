@@ -7,7 +7,7 @@ import { verifyOtp } from "./otp";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt", maxAge: 365 * 24 * 60 * 60 },
   pages: {
     signIn: "/login",
   },
