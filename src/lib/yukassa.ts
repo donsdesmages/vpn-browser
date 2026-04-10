@@ -3,7 +3,7 @@ const SECRET_KEY = process.env.YUKASSA_SECRET_KEY!;
 const BASE_URL = "https://api.yookassa.ru/v3";
 
 export const PLANS = {
-  week: { label: "Неделя", price: 60, seconds: 604800 },
+  week: { label: "Неделя", price: 99, seconds: 604800 },
   month: { label: "Месяц", price: 299, seconds: 2592000 },
   quarter: { label: "3 месяца", price: 599, seconds: 7776000 },
 } as const;

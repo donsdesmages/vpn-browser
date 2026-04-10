@@ -6,7 +6,7 @@ import Link from "next/link";
 import KeyIcon from "@/components/KeyIcon";
 
 const PLANS = [
-  { id: "week", label: "Неделя", price: 60, desc: "7 дней" },
+  { id: "week", label: "Неделя", price: 99, desc: "7 дней" },
   { id: "month", label: "Месяц", price: 299, desc: "30 дней", popular: true },
   { id: "quarter", label: "3 месяца", price: 599, desc: "90 дней" },
 ] as const;
