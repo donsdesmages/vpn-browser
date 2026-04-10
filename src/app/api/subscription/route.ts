@@ -14,10 +14,18 @@ export async function GET() {
 
   const [info, user] = await Promise.all([
     getUserInfo(telegramId),
-    prisma.webUser.findUnique({ where: { id: userId }, select: { accessKey: true } }),
+    prisma.webUser.findUnique({
+      where: { id: userId },
+      select: { accessKey: true, subscriptionStart: true, durationDays: true },
+    }),
   ]);
 
-  return NextResponse.json({ ...info, accessKey: user?.accessKey ?? null });
+  return NextResponse.json({
+    ...info,
+    accessKey: user?.accessKey ?? null,
+    subscriptionStart: user?.subscriptionStart?.toISOString() ?? null,
+    durationDays: user?.durationDays ?? null,
+  });
 }
 
 export async function DELETE() {

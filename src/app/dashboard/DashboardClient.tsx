@@ -9,6 +9,8 @@ interface SubscriptionInfo {
   active: boolean;
   expiringDate: string | null;
   accessKey: string | null;
+  subscriptionStart: string | null;
+  durationDays: number | null;
 }
 
 function formatDate(iso: string | null): string {
@@ -240,6 +242,33 @@ export default function DashboardClient({
                   <span className="font-semibold text-white">{formatDate(info.expiringDate)}</span>
                 </div>
               )}
+
+              {info?.active && info.subscriptionStart && info.durationDays && (() => {
+                const start = new Date(info.subscriptionStart).getTime();
+                const total = info.durationDays * 86400_000;
+                const elapsed = Date.now() - start;
+                const daysLeft = Math.max(0, Math.ceil((start + total - Date.now()) / 86400_000));
+                const pct = Math.min(100, Math.round((elapsed / total) * 100));
+                return (
+                  <div className="mt-4">
+                    <div className="flex justify-between mb-2" style={{ fontSize: 13 }}>
+                      <span className="text-[#6b7a99]">Осталось</span>
+                      <span className="text-[#6b7a99]">{daysLeft} из {info.durationDays} дней</span>
+                    </div>
+                    <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-700"
+                        style={{
+                          width: `${100 - pct}%`,
+                          background: pct > 80
+                            ? "linear-gradient(90deg, #ef4444, #f97316)"
+                            : "linear-gradient(90deg, #3b82f6, #60a5fa)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
             </>
           )}
         </div>

@@ -30,7 +30,11 @@ export async function POST(req: NextRequest) {
 
   await prisma.webUser.update({
     where: { id: user.id },
-    data: { accessKey },
+    data: {
+      accessKey,
+      subscriptionStart: new Date(),
+      durationDays: Math.round(plan.seconds / 86400),
+    },
   });
 
   if (user.telegramChatId) {
