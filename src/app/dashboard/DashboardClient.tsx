@@ -359,30 +359,29 @@ export default function DashboardClient({
               </svg>
             </div>
           ) : linkData ? (
-            <div className="glass rounded-2xl px-5 py-4 flex flex-col gap-3">
-              <div className="flex items-center gap-4">
+            <div className="glass rounded-2xl overflow-hidden">
+              <button
+                onClick={() => setLinkData(null)}
+                className="w-full px-5 py-4 flex items-center gap-4 hover:bg-white/5 transition-all"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#229ed9]/15 flex items-center justify-center flex-shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
                   </svg>
                 </div>
-                <div>
+                <div className="flex-1 text-left">
                   <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
                 </div>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setLinkData(null)}
-                  className="glass flex-1 py-3 rounded-xl text-[#6b7a99] hover:text-white transition-all"
-                  style={{ fontSize: 15 }}
-                >
-                  Отмена
-                </button>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rotate-180">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div className="px-5 pb-4">
                 <a
                   href={linkData.deepLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary flex-1 py-3 rounded-xl text-center font-semibold"
+                  className="btn-primary w-full py-3 rounded-xl text-center font-semibold block"
                   style={{ fontSize: 15 }}
                 >
                   Открыть @{linkData.botUsername}
