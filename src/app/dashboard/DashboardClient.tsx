@@ -237,9 +237,9 @@ export default function DashboardClient({
                 )}
               </div>
               {info?.active && info.expiringDate && (
-                <div className="text-[#6b7a99]" style={{ fontSize: 14 }}>
+                <div className="text-[13px] text-[#6b7a99]">
                   Действует до{" "}
-                  <span className="font-semibold text-white">{formatDate(info.expiringDate)}</span>
+                  <span className="text-white">{formatDate(info.expiringDate)}</span>
                 </div>
               )}
 
@@ -251,7 +251,7 @@ export default function DashboardClient({
                 const pct = Math.min(100, Math.round((elapsed / total) * 100));
                 return (
                   <div className="mt-4">
-                    <div className="flex justify-between mb-2" style={{ fontSize: 13 }}>
+                    <div className="flex justify-between mb-2 text-[13px]">
                       <span className="text-[#6b7a99]">Осталось</span>
                       <span className="text-[#6b7a99]">{daysLeft} из {info.durationDays} дней</span>
                     </div>
@@ -277,7 +277,7 @@ export default function DashboardClient({
         {info?.accessKey && (
           <div className={`rounded-2xl p-5 animate-fade-up-delay-1 transition-all ${paymentSuccess ? "border border-blue-500/40 bg-blue-500/5" : "glass"}`}
             style={paymentSuccess ? { boxShadow: "0 0 40px rgba(59,130,246,0.15)" } : {}}>
-            <div className="text-[#6b7a99] font-medium mb-3" style={{ fontSize: 13 }}>
+            <div className="text-[13px] text-[#6b7a99] mb-3">
               {paymentSuccess ? "Ваш ключ готов" : "Ключ доступа"}
             </div>
             <div className="relative bg-black/30 rounded-xl p-3 pr-10">
