@@ -91,7 +91,7 @@ export default function RegisterPage() {
                   contactTaken ? "border border-red-500 bg-red-500/10" : ""
                 }`}
               />
-              {contactTaken ? (
+              {contactTaken && (
                 <p className="text-red-400 text-xs mt-1.5 font-medium">
                   {contactType === "phone" && "Этот номер уже занят"}
                   {contactType === "email" && "Этот email уже занят"}
