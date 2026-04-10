@@ -10,9 +10,9 @@ type Tab = (typeof TABS)[number];
 
 const STEPS: Record<Tab, { step: string; desc: string; link?: string; linkLabel?: string }[]> = {
   iOS: [
-    { step: "1. Установите Hiddify", desc: "Доступно через TestFlight · бесплатно", link: "https://testflight.apple.com/join/dsNjHxjb", linkLabel: "Установить через TestFlight" },
+    { step: "1. Скачайте OneXray", desc: "Доступно в российском App Store · бесплатно", link: "https://apps.apple.com/us/app/onexray/id6745748773", linkLabel: "Открыть App Store" },
     { step: "2. Скопируйте ключ", desc: "В кабинете нажмите «Скопировать»" },
-    { step: "3. Добавьте конфиг", desc: "Hiddify → + → Вставить из буфера" },
+    { step: "3. Добавьте конфиг", desc: "OneXray → + → Вставить из буфера обмена" },
     { step: "4. Подключитесь", desc: "Нажмите на переключатель" },
   ],
   Android: [
