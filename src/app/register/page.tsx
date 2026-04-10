@@ -38,6 +38,7 @@ export default function RegisterPage() {
 
     if (!contact.trim()) { setError("Введите email, телефон или @telegram"); return; }
     if (!password.trim()) { setError("Введите пароль"); return; }
+    if (password.length < 6) { setError("Пароль должен быть не менее 6 символов"); return; }
     if (!confirm.trim()) { setError("Повторите пароль"); return; }
     if (password !== confirm) {
       setError("Пароли не совпадают");

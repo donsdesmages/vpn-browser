@@ -38,15 +38,15 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await loginWithCredentials(contact, password);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "";
-      if (msg.includes("CredentialsSignin") || msg.includes("credentials")) {
-        setError("Неверный контакт или пароль");
-      } else {
-        setError("Ошибка соединения. Попробуйте ещё раз.");
+      const result = await loginWithCredentials(contact, password);
+      if (result?.error === "invalid_credentials") {
+        setError("Неверный логин или пароль");
+      } else if (result?.error) {
+        setError("Ошибка входа. Попробуйте ещё раз.");
       }
       setLoading(false);
+    } catch {
+      // NEXT_REDIRECT — редирект при успешном входе, всё ок
     }
   }
 
