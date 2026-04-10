@@ -345,7 +345,6 @@ export default function DashboardClient({
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-white font-medium" style={{ fontSize: 15 }}>Telegram привязан</div>
-                <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Чеки об оплате приходят в бот</div>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
@@ -360,8 +359,7 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div>
-                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram</div>
-                  <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Откройте бота и отправьте команду</div>
+                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
                 </div>
               </div>
               <a
@@ -385,8 +383,7 @@ export default function DashboardClient({
                 </svg>
               </div>
               <div className="flex-1 text-left">
-                <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram</div>
-                <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Получайте чеки об оплате в бот</div>
+                <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
                 <polyline points="9 18 15 12 9 6"/>
