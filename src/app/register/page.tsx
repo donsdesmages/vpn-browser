@@ -36,6 +36,9 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
+    if (!contact.trim()) { setError("Введите email, телефон или @telegram"); return; }
+    if (!password.trim()) { setError("Введите пароль"); return; }
+    if (!confirm.trim()) { setError("Повторите пароль"); return; }
     if (password !== confirm) {
       setError("Пароли не совпадают");
       return;
@@ -86,7 +89,6 @@ export default function RegisterPage() {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="email, телефон или @telegram"
-                required
                 className={`input-field w-full px-4 py-3 rounded-xl transition-all ${
                   contactTaken ? "border border-red-500 bg-red-500/10" : ""
                 }`}
@@ -108,8 +110,6 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Минимум 6 символов"
-                  required
-                  minLength={6}
                   className="input-field w-full px-4 py-3 pr-11 rounded-xl"
                 />
                 <button type="button" onClick={() => setShowPassword((v) => !v)}
@@ -138,7 +138,6 @@ export default function RegisterPage() {
                   value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
                   placeholder="••••••••"
-                  required
                   className="input-field w-full px-4 py-3 pr-11 rounded-xl"
                 />
                 <button type="button" onClick={() => setShowConfirm((v) => !v)}

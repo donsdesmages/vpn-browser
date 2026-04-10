@@ -33,6 +33,8 @@ export default function LoginPage() {
   async function handlePasswordLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    if (!contact.trim()) { setError("Введите email, телефон или @telegram"); return; }
+    if (!password.trim()) { setError("Введите пароль"); return; }
     setLoading(true);
 
     try {
@@ -137,7 +139,6 @@ export default function LoginPage() {
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   placeholder="email, телефон или @telegram"
-                  required
                   className="input-field w-full px-4 py-3 rounded-xl"
                 />
               </div>
@@ -150,7 +151,6 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    required
                     className="input-field w-full px-4 py-3 pr-11 rounded-xl"
                   />
                   <button
