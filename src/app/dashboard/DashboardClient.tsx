@@ -65,7 +65,6 @@ export default function DashboardClient({
     }
   }, [fetchSubscription]);
 
-  // Полинг ключа после оплаты — webhook может прийти с задержкой
   useEffect(() => {
     if (!paymentSuccess || info?.accessKey) return;
     setPolling(true);
@@ -93,7 +92,6 @@ export default function DashboardClient({
     try {
       await navigator.clipboard.writeText(info.accessKey);
     } catch {
-      // Fallback для Safari / HTTP
       const el = document.createElement("textarea");
       el.value = info.accessKey;
       el.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
@@ -156,26 +154,28 @@ export default function DashboardClient({
       <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
         copied ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}>
-        <div className="flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-medium text-white"
-          style={{ background: "rgba(34,197,94,0.2)", border: "1px solid rgba(34,197,94,0.4)", backdropFilter: "blur(12px)" }}>
+        <div className="flex items-center gap-2 px-5 py-3 rounded-2xl font-medium text-white"
+          style={{ fontSize: 15, background: "rgba(34,197,94,0.2)", border: "1px solid rgba(34,197,94,0.4)", backdropFilter: "blur(12px)" }}>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
           Ключ скопирован
         </div>
       </div>
+
       {/* Header */}
       <div className="w-full max-w-lg flex items-center justify-between mb-10 animate-fade-up">
         <div className="flex items-center gap-3">
-          <KeyIcon size={36} />
-          <span className="font-bold text-lg gradient-text">KeyPay</span>
+          <KeyIcon size={32} />
+          <span className="font-semibold gradient-text" style={{ fontSize: 17 }}>KeyPay</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[#6b7a99] text-sm hidden sm:block">{email}</span>
+          <span className="text-[#6b7a99] hidden sm:block" style={{ fontSize: 13 }}>{email}</span>
           <button
             onClick={() => startTransition(() => logout())}
             disabled={isPending}
-            className="glass px-4 py-2 rounded-xl text-sm text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all disabled:opacity-50"
+            className="glass px-4 py-2 rounded-xl text-[#6b7a99] hover:text-white hover:bg-white/10 transition-all disabled:opacity-50"
+            style={{ fontSize: 14 }}
           >
             {isPending ? "Выходим..." : "Выйти"}
           </button>
@@ -193,19 +193,19 @@ export default function DashboardClient({
           }}>
             <div className="flex items-center gap-3 mb-1">
               <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
-              <span className="text-green-400 font-bold text-lg">Оплата прошла успешно!</span>
+              <span className="text-green-400 font-semibold" style={{ fontSize: 16 }}>Оплата прошла успешно!</span>
             </div>
-            <p className="text-green-400/70 text-sm ml-11">
-              {info?.accessKey ? "Ваш ключ доступа активирован и готов к использованию" : polling ? "Активируем ключ доступа..." : "Ключ скоро появится в кабинете"}
+            <p className="text-green-400/70 ml-11" style={{ fontSize: 14 }}>
+              {info?.accessKey ? "Ваш ключ активирован и готов к использованию" : polling ? "Активируем ключ доступа..." : "Ключ скоро появится в кабинете"}
             </p>
             {polling && !info?.accessKey && (
               <div className="flex items-center gap-2 ml-11 mt-2">
                 <div className="w-4 h-4 border-2 border-green-400 border-t-transparent rounded-full animate-spin" />
-                <span className="text-green-400/60 text-xs">Обычно занимает несколько секунд</span>
+                <span className="text-green-400/60" style={{ fontSize: 13 }}>Обычно занимает несколько секунд</span>
               </div>
             )}
           </div>
@@ -216,33 +216,28 @@ export default function DashboardClient({
           {loading ? (
             <div className="flex items-center gap-3 text-[#6b7a99]">
               <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-              Загрузка...
+              <span style={{ fontSize: 15 }}>Загрузка...</span>
             </div>
           ) : (
             <>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-white font-semibold">
-                  Подписка
-                </span>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-white font-semibold" style={{ fontSize: 16 }}>Подписка</span>
                 {info?.active ? (
-                  <span className="flex items-center gap-1.5 text-green-400 font-semibold text-sm">
+                  <span className="flex items-center gap-1.5 text-green-400 font-medium" style={{ fontSize: 14 }}>
                     <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                     Активна
                   </span>
                 ) : (
-                  <span className="flex items-center gap-1.5 text-[#6b7a99] text-sm">
+                  <span className="flex items-center gap-1.5 text-[#6b7a99]" style={{ fontSize: 14 }}>
                     <span className="w-2 h-2 bg-gray-500 rounded-full" />
                     Не активна
                   </span>
                 )}
               </div>
-
               {info?.active && info.expiringDate && (
-                <div className="text-white">
-                  Истекает:{" "}
-                  <span className="font-semibold text-[#60a5fa]">
-                    {formatDate(info.expiringDate)}
-                  </span>
+                <div className="text-[#6b7a99]" style={{ fontSize: 14 }}>
+                  Действует до{" "}
+                  <span className="font-semibold text-white">{formatDate(info.expiringDate)}</span>
                 </div>
               )}
             </>
@@ -251,15 +246,13 @@ export default function DashboardClient({
 
         {/* VPN Key */}
         {info?.accessKey && (
-          <div className={`rounded-2xl p-6 animate-fade-up-delay-1 transition-all ${paymentSuccess
-            ? "border border-blue-500/40 bg-blue-500/5"
-            : "glass"}`}
+          <div className={`rounded-2xl p-5 animate-fade-up-delay-1 transition-all ${paymentSuccess ? "border border-blue-500/40 bg-blue-500/5" : "glass"}`}
             style={paymentSuccess ? { boxShadow: "0 0 40px rgba(59,130,246,0.15)" } : {}}>
-            <div className="text-[#6b7a99] text-sm font-medium uppercase tracking-wider mb-3">
-              {paymentSuccess ? "Ваш ключ готов" : "Ваш ключ доступа"}
+            <div className="text-[#6b7a99] font-medium mb-3" style={{ fontSize: 13 }}>
+              {paymentSuccess ? "Ваш ключ готов" : "Ключ доступа"}
             </div>
             <div className="relative bg-black/30 rounded-xl p-3 pr-10">
-              <div className={`text-xs text-[#60a5fa] ${keyExpanded ? "break-all" : "truncate"}`}>
+              <div className={`text-[#60a5fa] ${keyExpanded ? "break-all" : "truncate"}`} style={{ fontSize: 13 }}>
                 {info.accessKey}
               </div>
               <button
@@ -281,7 +274,7 @@ export default function DashboardClient({
             </div>
             <button
               onClick={() => setKeyExpanded((v) => !v)}
-              className="flex items-center justify-center gap-1 w-full py-1 text-[#6b7a99] hover:text-white transition-colors"
+              className="flex items-center justify-center w-full py-1 text-[#6b7a99] hover:text-white transition-colors"
             >
               <svg
                 width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -297,22 +290,23 @@ export default function DashboardClient({
         <div className="flex gap-3 animate-fade-up-delay-2">
           <Link
             href="/plans"
-            className="btn-primary flex-1 py-3 rounded-xl text-center text-sm font-semibold"
+            className="btn-primary flex-1 py-3 rounded-xl text-center font-semibold"
+            style={{ fontSize: 15 }}
           >
             {info?.active ? "Продлить" : "Купить подписку"}
           </Link>
           <Link
             href="/instructions"
-            className="glass flex-1 py-3 rounded-xl text-center text-sm font-semibold text-[#60a5fa] hover:bg-white/10 transition-all"
+            className="glass flex-1 py-3 rounded-xl text-center font-medium text-[#60a5fa] hover:bg-white/10 transition-all"
+            style={{ fontSize: 15 }}
           >
             Инструкция
           </Link>
         </div>
 
-        {/* Telegram + Email link blocks */}
+        {/* Telegram + Email */}
         <div className="flex flex-col gap-3 animate-fade-up-delay-2">
 
-          {/* Telegram */}
           {linked ? (
             <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-[#229ed9]/15 flex items-center justify-center flex-shrink-0">
@@ -321,8 +315,8 @@ export default function DashboardClient({
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-white font-medium text-sm">Telegram привязан</div>
-                <div className="text-[#6b7a99] text-xs mt-0.5">Чеки об оплате приходят в бот</div>
+                <div className="text-white font-medium" style={{ fontSize: 15 }}>Telegram привязан</div>
+                <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Чеки об оплате приходят в бот</div>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
@@ -337,15 +331,16 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div>
-                  <div className="text-white font-medium text-sm">Привязать Telegram</div>
-                  <div className="text-[#6b7a99] text-xs mt-0.5">Откройте бота и отправьте команду</div>
+                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram</div>
+                  <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Откройте бота и отправьте команду</div>
                 </div>
               </div>
               <a
                 href={linkData.deepLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary w-full py-2.5 rounded-xl text-center text-sm font-semibold"
+                className="btn-primary w-full py-3 rounded-xl text-center font-semibold"
+                style={{ fontSize: 15 }}
               >
                 Открыть @{linkData.botUsername}
               </a>
@@ -361,8 +356,8 @@ export default function DashboardClient({
                 </svg>
               </div>
               <div className="flex-1 text-left">
-                <div className="text-white font-medium text-sm">Привязать Telegram</div>
-                <div className="text-[#6b7a99] text-xs mt-0.5">Получайте чеки об оплате в бот</div>
+                <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram</div>
+                <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Получайте чеки об оплате в бот</div>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
                 <polyline points="9 18 15 12 9 6"/>
@@ -370,7 +365,6 @@ export default function DashboardClient({
             </button>
           )}
 
-          {/* Email */}
           {contactType !== "email" && (
             linkedEmailState ? (
               <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
@@ -381,8 +375,8 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-white font-medium text-sm">Email привязан</div>
-                  <div className="text-[#6b7a99] text-xs mt-0.5 truncate">{linkedEmailState}</div>
+                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Email привязан</div>
+                  <div className="text-[#6b7a99] mt-0.5 truncate" style={{ fontSize: 13 }}>{linkedEmailState}</div>
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
@@ -397,29 +391,32 @@ export default function DashboardClient({
                       <polyline points="2,4 12,13 22,4"/>
                     </svg>
                   </div>
-                  <div className="text-white font-medium text-sm">Введите email</div>
+                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Введите email</div>
                 </div>
                 <input
                   type="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="you@example.com"
-                  className="input-field w-full px-4 py-2.5 rounded-xl text-sm"
+                  className="input-field w-full px-4 py-2.5 rounded-xl"
+                  style={{ fontSize: 15 }}
                 />
                 {emailError && (
-                  <div className="text-red-400 text-xs">{emailError}</div>
+                  <div className="text-red-400" style={{ fontSize: 13 }}>{emailError}</div>
                 )}
                 <div className="flex gap-2">
                   <button
                     onClick={() => { setShowEmailForm(false); setEmailError(""); }}
-                    className="glass flex-1 py-2.5 rounded-xl text-sm text-[#6b7a99] hover:text-white transition-all"
+                    className="glass flex-1 py-2.5 rounded-xl text-[#6b7a99] hover:text-white transition-all"
+                    style={{ fontSize: 15 }}
                   >
                     Отмена
                   </button>
                   <button
                     onClick={handleLinkEmail}
                     disabled={emailLinking || !emailInput.trim()}
-                    className="btn-primary flex-1 py-2.5 rounded-xl text-sm disabled:opacity-50"
+                    className="btn-primary flex-1 py-2.5 rounded-xl disabled:opacity-50"
+                    style={{ fontSize: 15 }}
                   >
                     {emailLinking ? "Сохраняем..." : "Привязать"}
                   </button>
@@ -437,8 +434,8 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="text-white font-medium text-sm">Привязать Email</div>
-                  <div className="text-[#6b7a99] text-xs mt-0.5">Для входа по коду подтверждения</div>
+                  <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Email</div>
+                  <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Для входа по коду подтверждения</div>
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
                   <polyline points="9 18 15 12 9 6"/>
@@ -446,14 +443,14 @@ export default function DashboardClient({
               </button>
             )
           )}
-
         </div>
 
         {info?.active && (
           <button
             onClick={cancelSubscription}
             disabled={cancelling}
-            className="text-sm text-red-400/70 hover:text-red-400 transition-colors text-center py-2 animate-fade-up-delay-2 disabled:opacity-50"
+            className="text-red-400/70 hover:text-red-400 transition-colors text-center py-2 animate-fade-up-delay-2 disabled:opacity-50"
+            style={{ fontSize: 14 }}
           >
             {cancelling ? "Отменяем..." : "Отменить подписку"}
           </button>
