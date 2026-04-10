@@ -51,6 +51,7 @@ export default function DashboardClient({
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [polling, setPolling] = useState(false);
+  const [linkingTelegram, setLinkingTelegram] = useState(false);
 
   const fetchSubscription = useCallback(async () => {
     setLoading(true);
@@ -140,13 +141,20 @@ export default function DashboardClient({
   }
 
   async function handleLinkTelegram() {
-    const res = await fetch("/api/link-telegram");
-    const data = await res.json();
-    if (data.alreadyLinked) {
-      setLinked(true);
-      return;
+    setLinkingTelegram(true);
+    try {
+      const res = await fetch("/api/link-telegram");
+      const data = await res.json();
+      if (data.alreadyLinked) {
+        setLinked(true);
+      } else {
+        setLinkData({ deepLink: data.deepLink, botUsername: data.botUsername });
+      }
+    } catch {
+      // silent fail — кнопка просто разблокируется
+    } finally {
+      setLinkingTelegram(false);
     }
-    setLinkData({ deepLink: data.deepLink, botUsername: data.botUsername });
   }
 
   return (
@@ -384,15 +392,22 @@ export default function DashboardClient({
           ) : (
             <button
               onClick={handleLinkTelegram}
-              className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group"
+              disabled={linkingTelegram}
+              className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <div className="w-10 h-10 rounded-xl bg-[#229ed9]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#229ed9]/20 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
-                </svg>
+                {linkingTelegram ? (
+                  <div className="w-5 h-5 border-2 border-[#229ed9] border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ed9">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+                  </svg>
+                )}
               </div>
               <div className="flex-1 text-left">
-                <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
+                <div className="text-white font-medium" style={{ fontSize: 15 }}>
+                  {linkingTelegram ? "Загружаем..." : "Привязать Telegram Бота"}
+                </div>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
                 <polyline points="9 18 15 12 9 6"/>
