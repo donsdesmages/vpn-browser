@@ -362,15 +362,24 @@ export default function DashboardClient({
                   <div className="text-white font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
                 </div>
               </div>
-              <a
-                href={linkData.deepLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary w-full py-3 rounded-xl text-center font-semibold"
-                style={{ fontSize: 15 }}
-              >
-                Открыть @{linkData.botUsername}
-              </a>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setLinkData(null)}
+                  className="glass flex-1 py-3 rounded-xl text-[#6b7a99] hover:text-white transition-all"
+                  style={{ fontSize: 15 }}
+                >
+                  Отмена
+                </button>
+                <a
+                  href={linkData.deepLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary flex-1 py-3 rounded-xl text-center font-semibold"
+                  style={{ fontSize: 15 }}
+                >
+                  Открыть @{linkData.botUsername}
+                </a>
+              </div>
             </div>
           ) : (
             <button
