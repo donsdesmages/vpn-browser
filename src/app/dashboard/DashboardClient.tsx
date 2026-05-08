@@ -248,7 +248,6 @@ export default function DashboardClient({
                 const start = new Date(info.subscriptionStart).getTime();
                 const total = info.durationDays * 86400_000;
                 const daysLeft = Math.max(0, Math.ceil((start + total - Date.now()) / 86400_000));
-                const pct = Math.min(100, Math.round(((Date.now() - start) / total) * 100));
                 return (
                   <>
                     <div className="flex items-baseline gap-3 mb-3">
@@ -256,28 +255,11 @@ export default function DashboardClient({
                       <span className="text-white font-medium" style={{ fontSize: 20 }}>дней</span>
                     </div>
                     {info.expiringDate && (
-                      <div className="text-[13px] text-[#6b7a99] mb-4">
+                      <div className="text-[13px] text-[#6b7a99]">
                         Действует до{" "}
                         <span className="text-white">{formatDate(info.expiringDate)}</span>
                       </div>
                     )}
-                    <div>
-                      <div className="flex justify-between mb-2 text-[13px]">
-                        <span className="text-[#6b7a99]">Осталось</span>
-                        <span className="text-[#6b7a99]">{daysLeft} из {info.durationDays} дней</span>
-                      </div>
-                      <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-700"
-                          style={{
-                            width: `${100 - pct}%`,
-                            background: pct > 80
-                              ? "linear-gradient(90deg, #ef4444, #f97316)"
-                              : "linear-gradient(90deg, #3b82f6, #60a5fa)",
-                          }}
-                        />
-                      </div>
-                    </div>
                   </>
                 );
               })() : (
