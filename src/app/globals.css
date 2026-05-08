@@ -41,7 +41,6 @@ body {
 /* Glass card */
 .glass {
   background: var(--bg-card);
-  border: 1px solid var(--border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -129,7 +128,7 @@ body {
 /* Input */
 .input-field {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: none;
   color: var(--text-primary);
   transition: border-color 0.3s, box-shadow 0.3s;
   outline: none;
