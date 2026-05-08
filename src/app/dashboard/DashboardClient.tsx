@@ -250,11 +250,8 @@ export default function DashboardClient({
                 const daysLeft = Math.max(0, Math.ceil((start + total - Date.now()) / 86400_000));
                 return (
                   <>
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{info.durationDays}</span>
-                        <div className="text-[#6b7a99] text-[13px] mt-1">на {info.durationDays} дней</div>
-                      </div>
+                    <div className="flex items-end justify-between mb-3">
+                      <div className="text-[#6b7a99] text-[13px]">на {info.durationDays} дней</div>
                       <div className="text-right">
                         <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{daysLeft}</span>
                         <div className="text-[#6b7a99] text-[13px] mt-1">осталось</div>
