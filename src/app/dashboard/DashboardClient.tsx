@@ -346,9 +346,9 @@ export default function DashboardClient({
 
           {linked ? (
             <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+              <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
@@ -364,7 +364,7 @@ export default function DashboardClient({
                 onClick={() => setLinkData(null)}
                 className="w-full px-5 py-4 flex items-center gap-4 transition-all"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
                   </svg>
@@ -394,7 +394,7 @@ export default function DashboardClient({
               disabled={linkingTelegram}
               className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/12 transition-colors">
+              <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/12 transition-colors">
                 {linkingTelegram ? (
                   <div className="w-5 h-5 border-2 border-white/40 border-t-transparent rounded-full animate-spin" />
                 ) : (
@@ -417,7 +417,7 @@ export default function DashboardClient({
           {contactType !== "email" && (
             linkedEmailState ? (
               <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
                     <polyline points="2,4 12,13 22,4"/>
@@ -434,7 +434,7 @@ export default function DashboardClient({
             ) : showEmailForm ? (
               <div className="glass rounded-2xl px-5 py-4 flex flex-col gap-3">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="4" width="20" height="16" rx="2"/>
                       <polyline points="2,4 12,13 22,4"/>
@@ -476,7 +476,7 @@ export default function DashboardClient({
                 onClick={() => setShowEmailForm(true)}
                 className="glass rounded-2xl px-5 py-4 flex items-center gap-4 w-full hover:bg-white/5 transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/12 transition-colors">
+                <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/12 transition-colors">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
                     <polyline points="2,4 12,13 22,4"/>
