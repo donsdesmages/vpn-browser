@@ -180,7 +180,6 @@ export default function DashboardClient({
           <span className="font-semibold gradient-text" style={{ fontSize: 17 }}>KeyPay</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[#6b7a99] hidden sm:block" style={{ fontSize: 13 }}>{email}</span>
           <button
             onClick={() => startTransition(() => logout())}
             disabled={isPending}
