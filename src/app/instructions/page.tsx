@@ -16,10 +16,10 @@ const STEPS: Record<Tab, { step: string; desc: string; link?: string; linkLabel?
     { step: "4. Подключитесь", desc: "Нажмите на переключатель" },
   ],
   Android: [
-    { step: "1. Скачайте v2rayNG", desc: "", link: "https://github.com/2dust/v2rayNG/releases/latest", linkLabel: "Скачать v2rayNG" },
+    { step: "1. Скачайте Happ", desc: "Доступно в Google Play · бесплатно", link: "https://play.google.com/store/apps/details?id=com.happproxy", linkLabel: "Открыть Google Play" },
     { step: "2. Скопируйте ключ", desc: "В кабинете нажмите «Скопировать»" },
-    { step: "3. Добавьте конфиг", desc: "v2rayNG → + → Импорт из буфера" },
-    { step: "4. Подключитесь", desc: "Нажмите кнопку запуска" },
+    { step: "3. Добавьте конфиг", desc: "Happ → + → Вставить из буфера обмена" },
+    { step: "4. Подключитесь", desc: "Нажмите на переключатель" },
   ],
   Windows: [
     { step: "1. Скачайте Hiddify", desc: "Официальный сайт · Windows", link: "https://github.com/hiddify/hiddify-app/releases/latest", linkLabel: "Скачать Hiddify" },
