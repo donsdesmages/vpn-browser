@@ -122,9 +122,9 @@ export default function LoginPage() {
         <div className="glass rounded-2xl p-8 animate-fade-up-delay-1">
 
           {justRegistered && (
-            <div className="text-green-400 text-sm text-center bg-green-500/10 border border-green-500/20 rounded-xl py-2 mb-4">
-              ✅ Аккаунт создан — войдите чтобы продолжить
-            </div>
+            <p className="text-green-400 text-sm text-center mb-4">
+              Аккаунт создан — войдите чтобы продолжить
+            </p>
           )}
 
           {/* Шаг 1: форма */}
