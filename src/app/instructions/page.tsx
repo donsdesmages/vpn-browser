@@ -16,7 +16,7 @@ const STEPS: Record<Tab, { step: string; desc: string; link?: string; linkLabel?
     { step: "4. Подключитесь", desc: "Нажмите на переключатель" },
   ],
   Android: [
-    { step: "1. Скачайте v2rayNG", desc: "Доступно бесплатно", link: "https://github.com/2dust/v2rayNG/releases/latest", linkLabel: "Скачать v2rayNG" },
+    { step: "1. Скачайте v2rayNG", desc: "", link: "https://github.com/2dust/v2rayNG/releases/latest", linkLabel: "Скачать v2rayNG" },
     { step: "2. Скопируйте ключ", desc: "В кабинете нажмите «Скопировать»" },
     { step: "3. Добавьте конфиг", desc: "v2rayNG → + → Импорт из буфера" },
     { step: "4. Подключитесь", desc: "Нажмите кнопку запуска" },
@@ -84,7 +84,7 @@ export default function InstructionsPage() {
               </div>
               <div className="flex-1">
                 <div className="text-white font-semibold text-sm">{s.step}</div>
-                <div className="text-[#6b7a99] text-sm mt-0.5">{s.desc}</div>
+                {s.desc && <div className="text-[#6b7a99] text-sm mt-0.5">{s.desc}</div>}
                 {s.link && (
                   <a
                     href={s.link}
