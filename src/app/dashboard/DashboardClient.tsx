@@ -229,7 +229,7 @@ export default function DashboardClient({
             </div>
           ) : (
             <>
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-4">
                 <span className="text-[#6b7a99] text-[11px] font-semibold tracking-widest uppercase">Подписка</span>
                 {info?.active ? (
                   <span className="flex items-center gap-1.5 text-green-400 font-medium" style={{ fontSize: 14 }}>
@@ -243,39 +243,51 @@ export default function DashboardClient({
                   </span>
                 )}
               </div>
-              {info?.active && info.expiringDate && (
-                <div className="text-[13px] text-[#6b7a99]">
-                  Действует до{" "}
-                  <span className="text-white">{formatDate(info.expiringDate)}</span>
-                </div>
-              )}
 
-              {info?.active && info.subscriptionStart && info.durationDays && (() => {
+              {info?.active && info.subscriptionStart && info.durationDays ? (() => {
                 const start = new Date(info.subscriptionStart).getTime();
                 const total = info.durationDays * 86400_000;
-                const elapsed = Date.now() - start;
                 const daysLeft = Math.max(0, Math.ceil((start + total - Date.now()) / 86400_000));
-                const pct = Math.min(100, Math.round((elapsed / total) * 100));
+                const pct = Math.min(100, Math.round(((Date.now() - start) / total) * 100));
                 return (
-                  <div className="mt-4">
-                    <div className="flex justify-between mb-2 text-[13px]">
-                      <span className="text-[#6b7a99]">Осталось</span>
-                      <span className="text-[#6b7a99]">{daysLeft} из {info.durationDays} дней</span>
+                  <>
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{daysLeft}</span>
+                      <span className="text-white font-medium" style={{ fontSize: 20 }}>дней</span>
                     </div>
-                    <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all duration-700"
-                        style={{
-                          width: `${100 - pct}%`,
-                          background: pct > 80
-                            ? "linear-gradient(90deg, #ef4444, #f97316)"
-                            : "linear-gradient(90deg, #3b82f6, #60a5fa)",
-                        }}
-                      />
+                    {info.expiringDate && (
+                      <div className="text-[13px] text-[#6b7a99] mb-4">
+                        Действует до{" "}
+                        <span className="text-white">{formatDate(info.expiringDate)}</span>
+                      </div>
+                    )}
+                    <div>
+                      <div className="flex justify-between mb-2 text-[13px]">
+                        <span className="text-[#6b7a99]">Осталось</span>
+                        <span className="text-[#6b7a99]">{daysLeft} из {info.durationDays} дней</span>
+                      </div>
+                      <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-700"
+                          style={{
+                            width: `${100 - pct}%`,
+                            background: pct > 80
+                              ? "linear-gradient(90deg, #ef4444, #f97316)"
+                              : "linear-gradient(90deg, #3b82f6, #60a5fa)",
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </>
                 );
-              })()}
+              })() : (
+                info?.active && info?.expiringDate && (
+                  <div className="text-[13px] text-[#6b7a99]">
+                    Действует до{" "}
+                    <span className="text-white">{formatDate(info.expiringDate)}</span>
+                  </div>
+                )
+              )}
             </>
           )}
         </div>
