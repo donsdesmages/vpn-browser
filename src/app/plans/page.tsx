@@ -72,7 +72,7 @@ export default function PlansPage() {
           {PLANS.map((plan, i) => (
             <div
               key={plan.id}
-              className={`glass rounded-2xl p-6 flex flex-col items-center text-center relative animate-fade-up ${"popular" in plan && plan.popular ? "border-blue-500/40 ring-1 ring-blue-500/30" : ""}`}
+              className="glass rounded-2xl p-6 flex flex-col items-center text-center relative animate-fade-up"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               {"popular" in plan && plan.popular && (

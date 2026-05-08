@@ -16,7 +16,7 @@ const STEPS: Record<Tab, { step: string; desc: string; link?: string; linkLabel?
     { step: "4. Подключитесь", desc: "Нажмите на переключатель" },
   ],
   Android: [
-    { step: "1. Скачайте v2rayNG", desc: "Google Play · бесплатно", link: "https://play.google.com/store/apps/details?id=com.v2ray.ang", linkLabel: "Открыть Google Play" },
+    { step: "1. Скачайте v2rayNG", desc: "Доступно бесплатно", link: "https://github.com/2dust/v2rayNG/releases/latest", linkLabel: "Скачать v2rayNG" },
     { step: "2. Скопируйте ключ", desc: "В кабинете нажмите «Скопировать»" },
     { step: "3. Добавьте конфиг", desc: "v2rayNG → + → Импорт из буфера" },
     { step: "4. Подключитесь", desc: "Нажмите кнопку запуска" },

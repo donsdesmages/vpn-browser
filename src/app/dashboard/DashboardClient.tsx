@@ -283,7 +283,7 @@ export default function DashboardClient({
 
         {/* VPN Key */}
         {info?.accessKey && (
-          <div className={`rounded-2xl p-5 animate-fade-up-delay-1 transition-all ${paymentSuccess ? "border border-blue-500/40 bg-blue-500/5" : "glass"}`}
+          <div className="glass rounded-2xl p-5 animate-fade-up-delay-1 transition-all"
             style={paymentSuccess ? { boxShadow: "0 0 40px rgba(59,130,246,0.15)" } : {}}>
             <div className="text-[13px] text-[#6b7a99] mb-3">
               {paymentSuccess ? "Ваш ключ готов" : "Ключ доступа"}
