@@ -256,7 +256,7 @@ export default function DashboardClient({
                         <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{info.durationDays}</span>
                         <span className="text-[#6b7a99] text-[15px]">дней</span>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0 ml-4">
                         <div className="text-[#6b7a99] text-[13px]">осталось</div>
                         <div className="text-white font-medium" style={{ fontSize: 15 }}>{daysLeft} дней</div>
                       </div>
