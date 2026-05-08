@@ -251,10 +251,14 @@ export default function DashboardClient({
                 return (
                   <>
                     <div className="flex items-end justify-between mb-3">
-                      <div className="text-[#6b7a99] text-[13px]">на {info.durationDays} дней</div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-[#6b7a99] text-[15px]">на</span>
+                        <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{info.durationDays}</span>
+                        <span className="text-[#6b7a99] text-[15px]">дней</span>
+                      </div>
                       <div className="text-right">
-                        <span className="gradient-text font-bold leading-none" style={{ fontSize: 68 }}>{daysLeft}</span>
-                        <div className="text-[#6b7a99] text-[13px] mt-1">осталось</div>
+                        <div className="text-[#6b7a99] text-[13px]">осталось</div>
+                        <div className="text-white font-medium" style={{ fontSize: 15 }}>{daysLeft} дней</div>
                       </div>
                     </div>
                     {info.expiringDate && (
