@@ -370,7 +370,7 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="text-[#6b7a99] text-[11px] font-semibold tracking-widest uppercase">Привязать Telegram Бота</div>
+                  <div className="text-[#6b7a99] font-medium" style={{ fontSize: 15 }}>Привязать Telegram Бота</div>
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rotate-180">
                   <polyline points="6 9 12 15 18 9"/>
@@ -404,7 +404,7 @@ export default function DashboardClient({
                 )}
               </div>
               <div className="flex-1 text-left">
-                <div className="text-[#6b7a99] text-[11px] font-semibold tracking-widest uppercase">
+                <div className="text-[#6b7a99] font-medium" style={{ fontSize: 15 }}>
                   {linkingTelegram ? "Загружаем..." : "Привязать Telegram Бота"}
                 </div>
               </div>
@@ -483,7 +483,7 @@ export default function DashboardClient({
                   </svg>
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="text-[#6b7a99] text-[11px] font-semibold tracking-widest uppercase">Привязать Email</div>
+                  <div className="text-[#6b7a99] font-medium" style={{ fontSize: 15 }}>Привязать Email</div>
                   <div className="text-[#6b7a99] mt-0.5" style={{ fontSize: 13 }}>Для входа по коду подтверждения</div>
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7a99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-white transition-colors">
