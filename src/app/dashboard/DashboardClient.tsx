@@ -347,7 +347,7 @@ export default function DashboardClient({
             <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
               <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
@@ -365,7 +365,7 @@ export default function DashboardClient({
               >
                 <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                   </svg>
                 </div>
                 <div className="flex-1 text-left">
@@ -398,7 +398,7 @@ export default function DashboardClient({
                   <div className="w-5 h-5 border-2 border-white/40 border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                   </svg>
                 )}
               </div>
@@ -419,7 +419,7 @@ export default function DashboardClient({
                 <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <polyline points="2,4 12,13 22,4"/>
+                    <path d="M4 6l8 7 8-7"/>
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -436,7 +436,7 @@ export default function DashboardClient({
                   <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="4" width="20" height="16" rx="2"/>
-                      <polyline points="2,4 12,13 22,4"/>
+                      <path d="M4 6l8 7 8-7"/>
                     </svg>
                   </div>
                   <div className="text-white font-medium" style={{ fontSize: 15 }}>Введите email</div>
@@ -478,7 +478,7 @@ export default function DashboardClient({
                 <div className="w-10 h-10 rounded-2xl bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/12 transition-colors">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <polyline points="2,4 12,13 22,4"/>
+                    <path d="M4 6l8 7 8-7"/>
                   </svg>
                 </div>
                 <div className="flex-1 text-left">
