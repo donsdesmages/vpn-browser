@@ -51,10 +51,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  // Идемпотентность: если подписка уже активна — не генерируем повторно
-  if (user.accessKey && user.subscriptionStart && user.durationDays) {
-    const expiresAt = new Date(user.subscriptionStart).getTime() + user.durationDays * 86400_000;
-    if (Date.now() < expiresAt) {
+  // Идемпотентность: если подписка была активирована менее 2 минут назад —
+  // значит этот же платёж уже обработан (защита от двойного вызова)
+  if (user.subscriptionStart) {
+    const activatedAt = new Date(user.subscriptionStart).getTime();
+    if (Date.now() - activatedAt < 2 * 60 * 1000) {
       return NextResponse.json({ status: "already_processed" });
     }
   }
