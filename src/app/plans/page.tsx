@@ -39,6 +39,9 @@ export default function PlansPage() {
       return;
     }
 
+    if (data.paymentId) {
+      localStorage.setItem("pending_payment_id", data.paymentId);
+    }
     window.location.href = data.confirmationUrl;
   }
 

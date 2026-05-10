@@ -69,26 +69,40 @@ export default function DashboardClient({
   }, [fetchSubscription]);
 
   useEffect(() => {
-    if (!paymentSuccess || info?.accessKey) return;
+    if (!paymentSuccess) return;
+
+    const paymentId = localStorage.getItem("pending_payment_id");
+    if (!paymentId) return;
+
     setPolling(true);
     let tries = 0;
-    const interval = setInterval(async () => {
+
+    const check = async () => {
       tries++;
-      const res = await fetch("/api/subscription");
-      if (res.ok) {
-        const data = await res.json();
+      try {
+        await fetch(`/api/payment/check?paymentId=${encodeURIComponent(paymentId)}`);
+      } catch {}
+
+      const subRes = await fetch("/api/subscription");
+      if (subRes.ok) {
+        const data = await subRes.json();
         setInfo(data);
-        if (data.accessKey || tries >= 10) {
-          clearInterval(interval);
+        if (data.accessKey) {
+          localStorage.removeItem("pending_payment_id");
           setPolling(false);
+          return;
         }
-      } else if (tries >= 10) {
-        clearInterval(interval);
+      }
+
+      if (tries < 5) {
+        setTimeout(check, 3000);
+      } else {
         setPolling(false);
       }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [paymentSuccess, info?.accessKey]);
+    };
+
+    check();
+  }, [paymentSuccess]);
 
   async function copyKey() {
     if (!info?.accessKey) return;

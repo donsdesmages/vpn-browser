@@ -20,5 +20,5 @@ export async function POST(req: NextRequest) {
     returnUrl
   );
 
-  return NextResponse.json({ confirmationUrl: payment.confirmationUrl });
+  return NextResponse.json({ confirmationUrl: payment.confirmationUrl, paymentId: payment.id });
 }
