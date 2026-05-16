@@ -63,3 +63,4 @@ jobs:
               -e TELEGRAM_BOT_USERNAME="KeyPayNowBot" \
               ghcr.io/${{ env.IMAGE_NAME }}:latest
             docker ps | grep vpn-browser
+            docker image prune -f --filter "until=24h"
