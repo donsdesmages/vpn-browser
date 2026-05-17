@@ -20,29 +20,41 @@ export default function PlansPage() {
     setError("");
     setLoading(planId);
 
-    const res = await fetch("/api/payment/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ planId }),
-    });
+    try {
+      const res = await fetch("/api/payment/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planId }),
+      });
 
-    if (res.status === 401) {
-      router.push("/login");
-      return;
+      if (res.status === 401) {
+        router.push("/login");
+        return;
+      }
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Ошибка создания платежа");
+        setLoading(null);
+        return;
+      }
+
+      if (!data.confirmationUrl) {
+        setError("Не удалось получить ссылку на оплату");
+        setLoading(null);
+        return;
+      }
+
+      if (data.paymentId) {
+        localStorage.setItem("pending_payment_id", data.paymentId);
+      }
+
+      window.location.href = data.confirmationUrl;
+    } catch {
+      setError("Ошибка сети — проверьте подключение и попробуйте снова");
+      setLoading(null);
     }
-
-    const data = await res.json();
-    setLoading(null);
-
-    if (!res.ok) {
-      setError(data.error || "Ошибка создания платежа");
-      return;
-    }
-
-    if (data.paymentId) {
-      localStorage.setItem("pending_payment_id", data.paymentId);
-    }
-    window.location.href = data.confirmationUrl;
   }
 
   return (
