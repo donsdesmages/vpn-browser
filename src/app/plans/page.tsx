@@ -84,7 +84,6 @@ export default function PlansPage() {
                 </div>
               )}
 
-              <div className="text-[#6b7a99] text-sm mb-2">{plan.desc}</div>
               <div className="text-white text-xl font-bold mb-1">{plan.label}</div>
               <div className="gradient-text text-4xl font-bold mb-6">
                 {plan.price} ₽
@@ -95,7 +94,7 @@ export default function PlansPage() {
                 disabled={loading !== null}
                 className="btn-primary w-full py-3 rounded-xl text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {loading === plan.id ? "..." : "Купить"}
+                {loading === plan.id ? "..." : "Оплатить"}
               </button>
             </div>
           ))}
