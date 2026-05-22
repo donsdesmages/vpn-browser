@@ -295,7 +295,7 @@ export default function DashboardClient({
         </div>
 
         {/* VPN Key */}
-        {info?.accessKey && (
+        {info?.active && info?.accessKey && (
           <div className="glass rounded-2xl p-5 animate-fade-up-delay-1 transition-all"
             style={paymentSuccess ? { boxShadow: "0 0 40px rgba(59,130,246,0.15)" } : {}}>
             <div className="text-[11px] text-[#6b7a99] font-semibold tracking-widest uppercase mb-3">

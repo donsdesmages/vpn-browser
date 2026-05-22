@@ -113,7 +113,7 @@ export default function PlansPage() {
         </div>
 
         <p className="text-center text-[#6b7a99] text-xs mt-8 animate-fade-up-delay-3">
-          Оплата через ЮKassa · Тестовая карта: 4111 1111 1111 1111
+          Оплата через ЮKassa
         </p>
       </div>
     </main>
